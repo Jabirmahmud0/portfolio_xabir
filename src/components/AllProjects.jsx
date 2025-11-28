@@ -1,16 +1,7 @@
 import { useState, useContext } from 'react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { ThemeContext } from '../ThemeProvider.jsx';
-import FolioxeImg from '../assets/Folioxe.png';
-import CureBayImg from '../assets/CureBay.png';
-import NextImg from '../assets/next.png';
-import NebulaImg from '../assets/Nebula.png';
-import OrbexaImg from '../assets/Orbexa.png';
-import CozyImg from '../assets/Cozy.png';
-import CareerByAIImg from '../assets/CareerByAIImg.png';
-import ComfortImg from '../assets/Comfort.png';
-import ArtLoopedImg from '../assets/ArtLooped.png';
-import portfolioImg from '../assets/portfolio.png';
+
 // Small carousel component for project photos
 function ProjectCard({ project, themeObj }) {
   const photos = project.photos || [];
@@ -160,7 +151,7 @@ const AllProjects = () => {
       "backend": "https://github.com/Jabirmahmud0/AI_career_Server",
       "live": "https://careerbyai.vercel.app/",
       "featured": true,
-      "photos": [CareerByAIImg]
+      "photos": ["/CareerByAIImg.png"]
     },
     {
       "name": "CureBay",
@@ -170,7 +161,7 @@ const AllProjects = () => {
       "backend": "https://github.com/Jabirmahmud0/CureBay_Backend",
       "live": "https://curebay.com",
       "featured": true,
-      photos: [CureBayImg],
+      photos: ["/CureBay.png"],
     },
     {
       name: "NextTalent Job Platform",
@@ -181,9 +172,9 @@ const AllProjects = () => {
       featured: true,
       category: "web",
       gradient: "from-blue-500 to-cyan-500",
-      photos: [NextImg]
+      photos: ["/next.png"]
     },
-  
+
     // Portfolio & personal branding
     {
       name: "Portfolio Website",
@@ -194,7 +185,7 @@ const AllProjects = () => {
       featured: true,
       category: "web",
       gradient: "from-teal-500 to-emerald-500",
-      photos: [portfolioImg]
+      photos: ["/portfolio.png"]
     },
     {
       name: "FolioXe",
@@ -205,9 +196,9 @@ const AllProjects = () => {
       featured: true,
       category: "web",
       gradient: "from-purple-500 to-pink-500",
-      photos: [FolioxeImg]
+      photos: ["/Folioxe.png"]
     },
-  
+
     // Commercial-style applications
     {
       name: "Comfort Inn (Hotel Booking App)",
@@ -218,7 +209,7 @@ const AllProjects = () => {
       featured: true,
       category: "web",
       gradient: "from-amber-500 to-rose-500",
-      photos: [ComfortImg]
+      photos: ["/Comfort.png"]
     },
     {
       name: "CozyFind (Real Estate App)",
@@ -229,9 +220,9 @@ const AllProjects = () => {
       featured: true,
       category: "web",
       gradient: "from-emerald-500 to-teal-400",
-      photos: [CozyImg]
+      photos: ["/Cozy.png"]
     },
-  
+
     // Creative marketing / interactive
     {
       name: "Neon 3D Marketing Site",
@@ -242,9 +233,9 @@ const AllProjects = () => {
       featured: false,
       category: "web",
       gradient: "from-pink-500 to-cyan-400",
-      photos: [NebulaImg]
+      photos: ["/Nebula.png"]
     },
-  
+
     // Standard projects (low priority)
     {
       name: "OrBexa (E-Commerce Website)",
@@ -255,14 +246,13 @@ const AllProjects = () => {
       featured: false,
       category: "web",
       gradient: "from-gray-800 to-blue-400",
-      photos: [OrbexaImg]
+      photos: ["/Orbexa.png"]
     },
-  
- 
+
   ];
-  
+
   const categories = ["all", "web", "productivity", "lifestyle"];
-  
+
   const normalizedSearch = search.trim().toLowerCase();
 
   const filteredProjects = projects.filter((p) => {

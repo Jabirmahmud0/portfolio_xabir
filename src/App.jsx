@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
-import profileImageLight from "./assets/jabir10.png";
-import profileImageDark from "./assets/jabir11.png";
 
 import { ThemeContext } from "./ThemeProvider.jsx";
 
@@ -105,7 +103,7 @@ const ElegantPortfolio = () => {
       backend: "https://github.com/Jabirmahmud0/AI_career_Server",
       live: "https://careerbyai.vercel.app/",
       featured: true,
-      image: "/src/assets/CareerByAIImg.png",
+      image: "/CareerByAIImg.png",
     },
 
     // High-performance full-stack commerce platform
@@ -125,7 +123,7 @@ const ElegantPortfolio = () => {
       backend: "https://github.com/Jabirmahmud0/CureBay_Backend",
       live: "https://cure-bay-client.vercel.app/",
       featured: true,
-      image: "/src/assets/CureBay.png",
+      image: "/CureBay.png",
     },
 
     // Scalable modern web app (multi-purpose)
@@ -136,7 +134,7 @@ const ElegantPortfolio = () => {
       github: "https://github.com/Jabirmahmud0/folioxe",
       live: "https://folioxe.vercel.app",
       featured: true,
-      image: "/src/assets/Folioxe.png",
+      image: "/Folioxe.png",
       backend: "",
     },
 
@@ -155,7 +153,7 @@ const ElegantPortfolio = () => {
       github: "https://github.com/Jabirmahmud0/NextTalent_Client",
       live: "https://next-talent-client.vercel.app",
       featured: false,
-      image: "/src/assets/next.png",
+      image: "/next.png",
     },
   ];
 
@@ -319,7 +317,7 @@ const ElegantPortfolio = () => {
                   <div className="float-right ml-6 mb-4">
                     <img
                       src={
-                        theme === "dark" ? profileImageDark : profileImageLight
+                        theme === "dark" ? "/jabir11.png" : "/jabir10.png"
                       }
                       alt="Jabir Mahmud"
                       className="rounded-lg w-32 h-auto object-contain border-2 border-teal-400/20 shadow-lg transition-transform duration-300 hover:scale-105 hover:border-teal-400/40 hover:shadow-xl"
