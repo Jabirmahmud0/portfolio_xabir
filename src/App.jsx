@@ -405,7 +405,7 @@ const ElegantPortfolio = () => {
             Frontend
           </header>
           <div className="z-10 sm:col-span-6">
-            <h3 className="font-medium leading-snug text-slate-200 mb-3">
+            <h3 className={`font-medium leading-snug ${themeObj.text} mb-3`}>
               Frontend Development
             </h3>
             <ul className="mt-2 text-sm leading-normal space-y-2">
@@ -426,7 +426,7 @@ const ElegantPortfolio = () => {
             Backend
           </header>
           <div className="z-10 sm:col-span-6">
-            <h3 className="font-medium leading-snug text-slate-200 mb-3">
+            <h3 className={`font-medium leading-snug ${themeObj.text} mb-3`}>
               Backend Development
             </h3>
             <ul className="mt-2 text-sm leading-normal space-y-2">
@@ -447,7 +447,7 @@ const ElegantPortfolio = () => {
             Tools
           </header>
           <div className="z-10 sm:col-span-6">
-            <h3 className="font-medium leading-snug text-slate-200 mb-3">
+            <h3 className={`font-medium leading-snug ${themeObj.text} mb-3`}>
               Development Tools & Workflow
             </h3>
             <ul className="mt-2 text-sm leading-normal space-y-2">
@@ -468,7 +468,7 @@ const ElegantPortfolio = () => {
             Focus Areas
           </header>
           <div className="z-10 sm:col-span-6">
-            <h3 className="font-medium leading-snug text-slate-200 mb-3">
+            <h3 className={`font-medium leading-snug ${themeObj.text} mb-3`}>
               What I Specialize In
             </h3>
             <ul className="mt-2 text-sm leading-normal space-y-2">
@@ -821,7 +821,7 @@ const ElegantPortfolio = () => {
         </div>
         {/* Quote Generator */}
         <div
-          class="fixed z-50 left-1/2 -translate-x-1/2 bottom-4 
+          className="fixed z-50 left-1/2 -translate-x-1/2 bottom-4 
          w-[90vw] max-w-xs text-center 
          sm:left-8 sm:translate-x-0 sm:text-left sm:max-w-md sm:w-auto sm:bottom-8 sm:text-base
          px-6 py-3 rounded-2xl 
