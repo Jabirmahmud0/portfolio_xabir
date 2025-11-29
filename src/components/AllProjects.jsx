@@ -136,7 +136,6 @@ function ProjectCard({ project, themeObj }) {
 
 const AllProjects = () => {
   const { theme, setTheme, themes } = useContext(ThemeContext);
-  const [filter, setFilter] = useState('all');
   const [search, setSearch] = useState('');
   const themeObj = themes[theme];
   const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
@@ -159,7 +158,7 @@ const AllProjects = () => {
       "tags": ["React", "Vite", "Tailwind", "Express", "MongoDB", "Stripe", "Firebase"],
       "github": "https://github.com/Jabirmahmud0/CureBay_Client",
       "backend": "https://github.com/Jabirmahmud0/CureBay_Backend",
-      "live": "https://curebay.com",
+      "live": "https://curebayy.vercel.app/",
       "featured": true,
       photos: ["/CureBay.png"],
     },
@@ -170,7 +169,6 @@ const AllProjects = () => {
       github: "https://github.com/Jabirmahmud0/NextTalent_Client",
       live: "https://next-talent-client.vercel.app",
       featured: true,
-      category: "web",
       gradient: "from-blue-500 to-cyan-500",
       photos: ["/next.png"]
     },
@@ -183,7 +181,6 @@ const AllProjects = () => {
       github: "https://github.com/Jabirmahmud0/portfolio_xabir",
       live: "https://jabir-chi.vercel.app/",
       featured: true,
-      category: "web",
       gradient: "from-teal-500 to-emerald-500",
       photos: ["/portfolio.png"]
     },
@@ -194,7 +191,6 @@ const AllProjects = () => {
       github: "https://github.com/Jabirmahmud0/folioxe",
       live: "https://folioxe.vercel.app",
       featured: true,
-      category: "web",
       gradient: "from-purple-500 to-pink-500",
       photos: ["/Folioxe.png"]
     },
@@ -207,7 +203,6 @@ const AllProjects = () => {
       github: "https://github.com/Jabirmahmud0/comfortin",
       live: "https://comfortin-five.vercel.app",
       featured: true,
-      category: "web",
       gradient: "from-amber-500 to-rose-500",
       photos: ["/Comfort.png"]
     },
@@ -218,7 +213,6 @@ const AllProjects = () => {
       github: "https://github.com/Jabirmahmud0/CozyFind",
       live: "https://cozy-find.vercel.app/",
       featured: true,
-      category: "web",
       gradient: "from-emerald-500 to-teal-400",
       photos: ["/Cozy.png"]
     },
@@ -231,7 +225,6 @@ const AllProjects = () => {
       github: "https://github.com/Jabirmahmud0/Nebula_Marketing",
       live: "https://nebula-marketing.vercel.app/",
       featured: false,
-      category: "web",
       gradient: "from-pink-500 to-cyan-400",
       photos: ["/Nebula.png"]
     },
@@ -244,19 +237,16 @@ const AllProjects = () => {
       github: "https://github.com/Jabirmahmud0/OrBexa_ECommerce",
       live: "https://orbexaecommerce.vercel.app",
       featured: false,
-      category: "web",
       gradient: "from-gray-800 to-blue-400",
       photos: ["/Orbexa.png"]
     },
 
   ];
 
-  const categories = ["all", "web", "productivity", "lifestyle"];
-
   const normalizedSearch = search.trim().toLowerCase();
 
   const filteredProjects = projects.filter((p) => {
-    // If there's an active search, ignore the category filter and search across all projects
+    // If there's an active search, search across all projects
     if (normalizedSearch) {
       const inName = p.name.toLowerCase().includes(normalizedSearch);
       const inDesc = (p.desc || '').toLowerCase().includes(normalizedSearch);
@@ -264,9 +254,7 @@ const AllProjects = () => {
       return inName || inDesc || inTags;
     }
 
-    // Otherwise, apply category filtering as before
-    if (filter !== 'all' && p.category !== filter) return false;
-
+    // Show all projects by default (no category filtering)
     return true;
   });
 
@@ -300,18 +288,18 @@ const AllProjects = () => {
         />
       </div>
 
-  <div className="container mx-auto px-8 md:px-16 lg:px-32 xl:px-48 py-8 md:py-12 relative z-10">
+  <div className="container mx-auto px-4 sm:px-6 py-6 md:px-16 lg:px-32 xl:px-48 md:py-12 relative z-10">
         {/* Header */}
         <Motion.div 
-          className="flex justify-between items-center mb-12"
+          className="flex justify-between items-center mb-8 md:mb-12"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <a href="/" className={`flex items-center ${themeObj.link} font-semibold group transition-all`}>
+          <a href="/" className={`flex items-center ${themeObj.link} font-semibold group transition-all text-base md:text-lg`}>
             <Motion.svg 
               xmlns="http://www.w3.org/2000/svg" 
-              className="h-5 w-5 mr-2 group-hover:-translate-x-1 transition-transform" 
+              className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" 
               viewBox="0 0 20 20" 
               fill="currentColor"
             >
@@ -321,7 +309,7 @@ const AllProjects = () => {
           </a>
           <Motion.button 
             onClick={toggleTheme}
-            className={`p-3 rounded-xl ${themeObj.buttonBg} ${themeObj.buttonText} shadow-lg transition-all`}
+            className={`p-2 md:p-3 rounded-xl ${themeObj.buttonBg} ${themeObj.buttonText} shadow-lg transition-all`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             aria-label="Toggle theme"
@@ -335,7 +323,7 @@ const AllProjects = () => {
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                   xmlns="http://www.w3.org/2000/svg" 
-                  className="h-5 w-5" 
+                  className="h-4 w-4 md:h-5 md:w-5" 
                   viewBox="0 0 20 20" 
                   fill="currentColor"
                 >
@@ -349,7 +337,7 @@ const AllProjects = () => {
                   exit={{ rotate: -90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                   xmlns="http://www.w3.org/2000/svg" 
-                  className="h-5 w-5" 
+                  className="h-4 w-4 md:h-5 md:w-5" 
                   viewBox="0 0 20 20" 
                   fill="currentColor"
                 >
@@ -362,48 +350,30 @@ const AllProjects = () => {
         
         {/* Title Section */}
         <Motion.div 
-          className="mb-12 text-center"
+          className="mb-8 md:mb-12 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h1 className={`text-5xl md:text-6xl font-bold mb-4 ${themeObj.text}`}>
+          <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-3 md:mb-4 ${themeObj.text}`}>
             <span className={`bg-gradient-to-r ${themeObj.gradientText} bg-clip-text text-transparent`}>
               Project Archive
             </span>
           </h1>
-          <p className={`text-lg md:text-xl ${themeObj.muted} max-w-2xl mx-auto`}>
+          <p className={`text-base md:text-lg lg:text-xl ${themeObj.muted} max-w-2xl mx-auto px-2`}>
             A curated collection of my work, experiments, and creative explorations
           </p>
         </Motion.div>
 
-        {/* Filter Tabs + Search */}
+        {/* Search */}
         <Motion.div 
-          className="flex flex-col md:flex-row items-center justify-center mb-12 gap-4"
+          className="flex justify-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((cat) => (
-              <Motion.button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`px-6 py-2.5 rounded-full font-medium transition-all ${
-                  filter === cat
-                    ? `bg-gradient-to-r ${themeObj.gradientButton} text-white shadow-lg`
-                    : `${themeObj.buttonBg} ${themeObj.buttonText} border ${themeObj.border}`
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
-              </Motion.button>
-            ))}
-          </div>
-
           {/* small search input */}
-          <div className="flex items-center gap-2 ml-0 md:ml-6">
+          <div className="flex items-center gap-2">
             <label htmlFor="project-search" className="sr-only">Search projects</label>
             <div className={`flex items-center px-3 py-2 rounded-full border ${themeObj.border} ${themeObj.buttonBg} ${themeObj.buttonText} shadow-sm`}>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -416,7 +386,7 @@ const AllProjects = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search"
-                className={`bg-transparent outline-none appearance-none text-sm placeholder-slate-400 ${themeObj.text} w-36`}
+                className={`bg-transparent outline-none appearance-none text-sm placeholder-slate-400 ${themeObj.text} w-36 md:w-48`}
               />
               {search && (
                 <button onClick={() => setSearch('')} aria-label="Clear search" className="ml-2 text-slate-400 hover:text-slate-600">
@@ -449,9 +419,6 @@ const AllProjects = () => {
                           ⭐ Featured
                         </span>
                       )}
-                      <span className={`px-3 py-1 ${themeObj.tag} text-xs font-semibold rounded-full`}>
-                        {project.category}
-                      </span>
                     </div>
                     
                     <h3 className={`text-3xl font-bold mb-4 ${themeObj.text} ${themeObj.titleHover} transition-all`}>
@@ -514,12 +481,38 @@ const AllProjects = () => {
                         </svg>
                         Source Code
                       </Motion.a>
+                      
+                      {project.backend && (
+                        <Motion.a
+                          href={project.backend}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`flex items-center ${themeObj.link} font-semibold transition-all`}
+                          whileHover={{ x: 5 }}
+                        >
+                          <svg
+                            className="h-5 w-5 mr-2"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M2.4 10.8v8.4c0 1.2.8 2 2 2h15.2c1.2 0 2-.8 2-2v-8.4M12 13.6l9.6-2.8M12 13.6l-9.6-2.8M12 13.6v8.8M4 7.6l9.6 3.2 9.6-3.2c.8-.4.8-1.6 0-2L12.8 2.4c-.8-.4-2-.4-2.8 0L2.4 5.6c-.8.4-.8 1.6 0 2z"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                          Backend
+                        </Motion.a>
+                      )}
                     </div>
                   </div>
                   
                   {/* Project Image / Photos Carousel */}
                   <div className="md:w-1/3 w-full relative overflow-hidden flex items-stretch shrink-0">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20 group-hover:opacity-30 transition-opacity pointer-events-none z-0`} />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient || 'from-blue-500 to-purple-500'} opacity-20 group-hover:opacity-30 transition-opacity pointer-events-none z-0`} />
                     <ProjectCard project={project} themeObj={themeObj} />
                   </div>
                 </div>

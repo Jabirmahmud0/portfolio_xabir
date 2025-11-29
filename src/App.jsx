@@ -121,22 +121,12 @@ const ElegantPortfolio = () => {
       ],
       github: "https://github.com/Jabirmahmud0/CureBay_Client",
       backend: "https://github.com/Jabirmahmud0/CureBay_Backend",
-      live: "https://cure-bay-client.vercel.app/",
+      live: "https://curebayy.vercel.app/",
       featured: true,
       image: "/CureBay.png",
     },
 
-    // Scalable modern web app (multi-purpose)
-    {
-      name: "FolioXe",
-      desc: "A modern, versatile web app usable as an e-commerce platform, portfolio, dashboard, or SaaS product with full role management and secure payments.",
-      tags: ["React", "Firebase", "Tailwind", "Vite", "Stripe"],
-      github: "https://github.com/Jabirmahmud0/folioxe",
-      live: "https://folioxe.vercel.app",
-      featured: true,
-      image: "/Folioxe.png",
-      backend: "",
-    },
+    
 
     // Career and job matching platform
     {
@@ -399,8 +389,8 @@ const ElegantPortfolio = () => {
     <ol className="group/list">
       {/* Frontend Development */}
       <li className="mb-12">
-        <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-          <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50"></div>
+        <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-70">
+          <div className={`absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block ${theme === "light" ? "lg:group-hover:bg-blue-50" : "lg:group-hover:bg-slate-800/50"}`}></div>
           <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">
             Frontend
           </header>
@@ -409,19 +399,20 @@ const ElegantPortfolio = () => {
               Frontend Development
             </h3>
             <ul className="mt-2 text-sm leading-normal space-y-2">
-              <li><span className="text-teal-300 font-medium">React.js</span> - Component-based UIs, Hooks, Context API</li>
-              <li><span className="text-teal-300 font-medium">Next.js</span> - SSR, SSG, API routes</li>
-              <li><span className="text-teal-300 font-medium">Tailwind CSS</span> - Responsive, utility-first styling</li>
-              <li><span className="text-teal-300 font-medium">JavaScript (ES6+)</span> - Async/await, destructuring, modules</li>
-            </ul>
+  <li><span className="text-sky-600 font-medium">React.js</span> - Component-based UIs, Hooks, Context API</li>
+  <li><span className="text-sky-500 font-medium">Next.js</span> - SSR, SSG, API routes</li>
+  <li><span className="text-sky-500 font-medium">Tailwind CSS</span> - Responsive, utility-first styling</li>
+  <li><span className="text-sky-500 font-medium">JavaScript (ES6+)</span> - Async/await, destructuring, modules</li>
+</ul>
+
           </div>
         </div>
       </li>
 
       {/* Backend Development */}
       <li className="mb-12">
-        <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-          <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50"></div>
+        <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-70">
+          <div className={`absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block ${theme === "light" ? "lg:group-hover:bg-blue-50" : "lg:group-hover:bg-slate-800/50"}`}></div>
           <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">
             Backend
           </header>
@@ -430,10 +421,10 @@ const ElegantPortfolio = () => {
               Backend Development
             </h3>
             <ul className="mt-2 text-sm leading-normal space-y-2">
-              <li><span className="text-teal-300 font-medium">Node.js</span> - Scalable server-side applications</li>
-              <li><span className="text-teal-300 font-medium">Express.js</span> - RESTful APIs, middleware, authentication</li>
-              <li><span className="text-teal-300 font-medium">MongoDB</span> - Database design, aggregation, indexing</li>
-              <li><span className="text-teal-300 font-medium">JWT Authentication</span> - Secure user sessions</li>
+              <li><span className="text-sky-500 font-medium">Node.js</span> - Scalable server-side applications</li>
+              <li><span className="text-sky-500 font-medium">Express.js</span> - RESTful APIs, middleware, authentication</li>
+              <li><span className="text-sky-500 font-medium">MongoDB</span> - Database design, aggregation, indexing</li>
+              <li><span className="text-sky-500 font-medium">JWT Authentication</span> - Secure user sessions</li>
             </ul>
           </div>
         </div>
@@ -441,8 +432,8 @@ const ElegantPortfolio = () => {
 
       {/* Tools & Workflow */}
       <li className="mb-12">
-        <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-          <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50"></div>
+        <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-70">
+          <div className={`absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block ${theme === "light" ? "lg:group-hover:bg-blue-50" : "lg:group-hover:bg-slate-800/50"}`}></div>
           <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">
             Tools
           </header>
@@ -451,10 +442,10 @@ const ElegantPortfolio = () => {
               Development Tools & Workflow
             </h3>
             <ul className="mt-2 text-sm leading-normal space-y-2">
-              <li><span className="text-teal-300 font-medium">Git & GitHub</span> - Version control, collaboration</li>
-              <li><span className="text-teal-300 font-medium">VS Code</span> - Development environment optimization</li>
-              <li><span className="text-teal-300 font-medium">Postman</span> - API testing and documentation</li>
-              <li><span className="text-teal-300 font-medium">npm/yarn</span> - Package management</li>
+              <li><span className="text-sky-500 font-medium">Git & GitHub</span> - Version control, collaboration</li>
+              <li><span className="text-sky-500 font-medium">VS Code</span> - Development environment optimization</li>
+              <li><span className="text-sky-500 font-medium">Postman</span> - API testing and documentation</li>
+              <li><span className="text-sky-500 font-medium">npm/yarn</span> - Package management</li>
             </ul>
           </div>
         </div>
@@ -462,8 +453,8 @@ const ElegantPortfolio = () => {
 
       {/* Specializations */}
       <li className="mb-12">
-        <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-          <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50"></div>
+        <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-70">
+          <div className={`absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block ${theme === "light" ? "lg:group-hover:bg-blue-50" : "lg:group-hover:bg-slate-800/50"}`}></div>
           <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">
             Focus Areas
           </header>
@@ -472,12 +463,12 @@ const ElegantPortfolio = () => {
               What I Specialize In
             </h3>
             <ul className="mt-2 text-sm leading-normal space-y-2">
-              <li><span className="text-teal-300 font-medium">Full-Stack Web Apps</span> - End-to-end MERN development</li>
-              <li><span className="text-teal-300 font-medium">AI Integration</span> - OpenAI, Google Gemini, automated workflows</li>
-              <li><span className="text-teal-300 font-medium">System Architecture</span> - Scalable & role-based platforms</li>
-              <li><span className="text-teal-300 font-medium">Responsive Design</span> - Mobile-first, cross-browser compatible</li>
-              <li><span className="text-teal-300 font-medium">API Integration</span> - Third-party services, payment gateways</li>
-              <li><span className="text-teal-300 font-medium">Performance Optimization</span> - Fast load times, efficient code</li>
+              <li><span className="text-sky-500 font-medium">Full-Stack Web Apps</span> - End-to-end MERN development</li>
+              <li><span className="text-sky-500 font-medium">AI Integration</span> - OpenAI, Google Gemini, automated workflows</li>
+              <li><span className="text-sky-500 font-medium">System Architecture</span> - Scalable & role-based platforms</li>
+              <li><span className="text-sky-500 font-medium">Responsive Design</span> - Mobile-first, cross-browser compatible</li>
+              <li><span className="text-sky-500 font-medium">API Integration</span> - Third-party services, payment gateways</li>
+              <li><span className="text-sky-500 font-medium">Performance Optimization</span> - Fast load times, efficient code</li>
 
             </ul>
           </div>
@@ -652,14 +643,22 @@ const ElegantPortfolio = () => {
                   </ol>
                   <div className="mt-12">
                     <motion.a
-                      className="inline-flex items-center leading-tight text-teal-700 font-semibold group hover:text-teal-900 dark:text-teal-400 dark:hover:text-teal-300"
+                      className={`inline-flex items-center leading-tight font-semibold group transition-colors duration-300 ${
+                        theme === "light" 
+                          ? "text-gray-700 hover:text-gray-900" 
+                          : "text-slate-200 hover:text-white"
+                      }`}
                       aria-label="View Full Project Archive"
                       href="/projects"
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.2 }}
                     >
                       <span>
-                        <span className="border-b border-transparent pb-px transition group-hover:border-teal-700 motion-reduce:transition-none dark:group-hover:border-teal-400">
+                        <span className={`border-b pb-px transition ${
+                          theme === "light" 
+                            ? "border-gray-300 group-hover:border-gray-900" 
+                            : "border-slate-400 group-hover:border-white"
+                        }`}>
                           View Full Project Archive
                         </span>
                         <span className="whitespace-nowrap">
