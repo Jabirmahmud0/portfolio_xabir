@@ -88,6 +88,23 @@ const ElegantPortfolio = () => {
   const projects = [
     // Most impactful / AI-driven
     {
+      name: "TechVault — Premium E-Commerce",
+      desc: "An enterprise-ready electronics e-commerce platform with Turborepo monorepo architecture, role-based access, and secure payments.",
+      tags: [
+        "Next.js 16",
+        "Express.js",
+        "PostgreSQL",
+        "Drizzle ORM",
+        "Stripe",
+        "Turborepo",
+        "Docker",
+      ],
+      github: "https://github.com/Jabirmahmud0/techvault",
+      live: "https://gotechvault.vercel.app",
+      featured: true,
+      image: "/techvault1.png",
+    },
+    {
       name: "CareerByAI",
       desc: "An AI-powered youth career platform that generates personalized roadmaps, matches jobs, analyzes CVs, and curates learning resources using Google Gemini AI.",
       tags: [
@@ -124,26 +141,6 @@ const ElegantPortfolio = () => {
       live: "https://curebayy.vercel.app/",
       featured: true,
       image: "/CureBay.png",
-    },
-
-    
-
-    // Career and job matching platform
-    {
-      name: "NextTalent Job Platform",
-      desc: "A job search and recruitment platform featuring resume building, job posting, application tracking, and real-time interview scheduling.",
-      tags: [
-        "React.js",
-        "JavaScript",
-        "Tailwind CSS",
-        "Axios",
-        "Socket.io",
-        "Firebase",
-      ],
-      github: "https://github.com/Jabirmahmud0/NextTalent_Client",
-      live: "https://next-talent-client.vercel.app",
-      featured: false,
-      image: "/next.png",
     },
   ];
 
@@ -185,11 +182,10 @@ const ElegantPortfolio = () => {
             <button
               key={t}
               onClick={() => setTheme(t)}
-              className={`px-3 py-1 rounded-full font-bold text-xs border-2 transition-all ${
-                theme === t
-                  ? "border-teal-300 bg-slate-800 text-teal-300"
-                  : "border-slate-700 bg-slate-900 text-slate-400 hover:border-teal-300 hover:text-teal-300"
-              }`}
+              className={`px-3 py-1 rounded-full font-bold text-xs border-2 transition-all ${theme === t
+                ? "border-teal-300 bg-slate-800 text-teal-300"
+                : "border-slate-700 bg-slate-900 text-slate-400 hover:border-teal-300 hover:text-teal-300"
+                }`}
               aria-label={`Switch to ${themes[t].name} theme`}
             >
               {themes[t].name}
@@ -234,25 +230,22 @@ const ElegantPortfolio = () => {
                         <li key={section}>
                           <button
                             onClick={() => scrollToSection(section)}
-                            className={`group flex items-center py-3 ${
-                              activeSection === section ? "active" : ""
-                            }`}
+                            className={`group flex items-center py-3 ${activeSection === section ? "active" : ""
+                              }`}
                             aria-label={`Scroll to ${section} section`}
                           >
                             <span
-                              className={`nav-indicator mr-4 h-px transition-all ${
-                                activeSection === section
-                                  ? themeObj.indicator + " w-16"
-                                  : "w-8 bg-slate-600 group-hover:w-16 group-hover:" +
-                                    themeObj.indicator
-                              }`}
+                              className={`nav-indicator mr-4 h-px transition-all ${activeSection === section
+                                ? themeObj.indicator + " w-16"
+                                : "w-8 bg-slate-600 group-hover:w-16 group-hover:" +
+                                themeObj.indicator
+                                }`}
                             ></span>
                             <span
-                              className={`nav-text text-xs font-bold uppercase tracking-widest transition-colors ${
-                                activeSection === section
-                                  ? themeObj.accent
-                                  : themeObj.muted
-                              }`}
+                              className={`nav-text text-xs font-bold uppercase tracking-widest transition-colors ${activeSection === section
+                                ? themeObj.accent
+                                : themeObj.muted
+                                }`}
                             >
                               {section}
                             </span>
@@ -269,11 +262,10 @@ const ElegantPortfolio = () => {
                   href="/JabirCV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center px-4 py-2 rounded-lg border ${
-                    theme === "light"
-                      ? "border-gray-300 text-gray-700 hover:bg-gray-50"
-                      : "border-gray-600 text-gray-300 hover:bg-gray-800"
-                  } font-medium transition-colors duration-300`}
+                  className={`inline-flex items-center px-4 py-2 rounded-lg border ${theme === "light"
+                    ? "border-gray-300 text-gray-700 hover:bg-gray-50"
+                    : "border-gray-600 text-gray-300 hover:bg-gray-800"
+                    } font-medium transition-colors duration-300`}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -376,107 +368,107 @@ const ElegantPortfolio = () => {
               </section>
               {/* Experience Section */}
               <section
-  id="skills"
-  className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
-  aria-label="Skills and expertise"
->
-  <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
-    <h2 className="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">
-      Skills & Expertise
-    </h2>
-  </div>
-  <div>
-    <ol className="group/list">
-      {/* Frontend Development */}
-      <li className="mb-12">
-        <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-70">
-          <div className={`absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block ${theme === "light" ? "lg:group-hover:bg-blue-50" : "lg:group-hover:bg-slate-800/50"}`}></div>
-          <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">
-            Frontend
-          </header>
-          <div className="z-10 sm:col-span-6">
-            <h3 className={`font-medium leading-snug ${themeObj.text} mb-3`}>
-              Frontend Development
-            </h3>
-            <ul className="mt-2 text-sm leading-normal space-y-2">
-  <li><span className="text-sky-600 font-medium">React.js</span> - Component-based UIs, Hooks, Context API</li>
-  <li><span className="text-sky-500 font-medium">Next.js</span> - SSR, SSG, API routes</li>
-  <li><span className="text-sky-500 font-medium">Tailwind CSS</span> - Responsive, utility-first styling</li>
-  <li><span className="text-sky-500 font-medium">JavaScript (ES6+)</span> - Async/await, destructuring, modules</li>
-</ul>
+                id="skills"
+                className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+                aria-label="Skills and expertise"
+              >
+                <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                  <h2 className="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">
+                    Skills & Expertise
+                  </h2>
+                </div>
+                <div>
+                  <ol className="group/list">
+                    {/* Frontend Development */}
+                    <li className="mb-12">
+                      <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-70">
+                        <div className={`absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block ${theme === "light" ? "lg:group-hover:bg-blue-50" : "lg:group-hover:bg-slate-800/50"}`}></div>
+                        <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">
+                          Frontend
+                        </header>
+                        <div className="z-10 sm:col-span-6">
+                          <h3 className={`font-medium leading-snug ${themeObj.text} mb-3`}>
+                            Frontend Development
+                          </h3>
+                          <ul className="mt-2 text-sm leading-normal space-y-2">
+                            <li><span className="text-sky-600 font-medium">React 19 & Next.js 16</span> - SSR, RSC, Server Actions</li>
+                            <li><span className="text-sky-500 font-medium">TypeScript</span> - Static typing, interface design</li>
+                            <li><span className="text-sky-500 font-medium">Tailwind CSS & Shadcn/UI</span> - Modern, accessible styling</li>
+                            <li><span className="text-sky-500 font-medium">State Management</span> - Zustand, React Query (TanStack)</li>
+                            <li><span className="text-sky-500 font-medium">Framer Motion</span> - Advanced animations & interactions</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
 
-          </div>
-        </div>
-      </li>
+                    {/* Backend Development */}
+                    <li className="mb-12">
+                      <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-70">
+                        <div className={`absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block ${theme === "light" ? "lg:group-hover:bg-blue-50" : "lg:group-hover:bg-slate-800/50"}`}></div>
+                        <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">
+                          Backend
+                        </header>
+                        <div className="z-10 sm:col-span-6">
+                          <h3 className={`font-medium leading-snug ${themeObj.text} mb-3`}>
+                            Backend Development
+                          </h3>
+                          <ul className="mt-2 text-sm leading-normal space-y-2">
+                            <li><span className="text-sky-500 font-medium">Node.js & Express.js</span> - Scalable microservices & APIs</li>
+                            <li><span className="text-sky-500 font-medium">PostgreSQL & Drizzle ORM</span> - Relational data, type-safe queries</li>
+                            <li><span className="text-sky-500 font-medium">Auth & Security</span> - JWT, Zod Validation, Google OAuth</li>
+                            <li><span className="text-sky-500 font-medium">Integration</span> - Stripe Payments, Cloudinary, Nodemailer</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
 
-      {/* Backend Development */}
-      <li className="mb-12">
-        <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-70">
-          <div className={`absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block ${theme === "light" ? "lg:group-hover:bg-blue-50" : "lg:group-hover:bg-slate-800/50"}`}></div>
-          <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">
-            Backend
-          </header>
-          <div className="z-10 sm:col-span-6">
-            <h3 className={`font-medium leading-snug ${themeObj.text} mb-3`}>
-              Backend Development
-            </h3>
-            <ul className="mt-2 text-sm leading-normal space-y-2">
-              <li><span className="text-sky-500 font-medium">Node.js</span> - Scalable server-side applications</li>
-              <li><span className="text-sky-500 font-medium">Express.js</span> - RESTful APIs, middleware, authentication</li>
-              <li><span className="text-sky-500 font-medium">MongoDB</span> - Database design, aggregation, indexing</li>
-              <li><span className="text-sky-500 font-medium">JWT Authentication</span> - Secure user sessions</li>
-            </ul>
-          </div>
-        </div>
-      </li>
+                    {/* Tools & Workflow */}
+                    <li className="mb-12">
+                      <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-70">
+                        <div className={`absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block ${theme === "light" ? "lg:group-hover:bg-blue-50" : "lg:group-hover:bg-slate-800/50"}`}></div>
+                        <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">
+                          Tools
+                        </header>
+                        <div className="z-10 sm:col-span-6">
+                          <h3 className={`font-medium leading-snug ${themeObj.text} mb-3`}>
+                            Development Tools & Workflow
+                          </h3>
+                          <ul className="mt-2 text-sm leading-normal space-y-2">
+                            <li><span className="text-sky-500 font-medium">Turborepo & Docker</span> - Monorepos, containerization</li>
+                            <li><span className="text-sky-500 font-medium">Git & GitHub</span> - CI/CD, collaborative workflows</li>
+                            <li><span className="text-sky-500 font-medium">Deployment</span> - Vercel, Render, Neon</li>
+                            <li><span className="text-sky-500 font-medium">Testing</span> - Vitest, React Testing Library</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
 
-      {/* Tools & Workflow */}
-      <li className="mb-12">
-        <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-70">
-          <div className={`absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block ${theme === "light" ? "lg:group-hover:bg-blue-50" : "lg:group-hover:bg-slate-800/50"}`}></div>
-          <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">
-            Tools
-          </header>
-          <div className="z-10 sm:col-span-6">
-            <h3 className={`font-medium leading-snug ${themeObj.text} mb-3`}>
-              Development Tools & Workflow
-            </h3>
-            <ul className="mt-2 text-sm leading-normal space-y-2">
-              <li><span className="text-sky-500 font-medium">Git & GitHub</span> - Version control, collaboration</li>
-              <li><span className="text-sky-500 font-medium">VS Code</span> - Development environment optimization</li>
-              <li><span className="text-sky-500 font-medium">Postman</span> - API testing and documentation</li>
-              <li><span className="text-sky-500 font-medium">npm/yarn</span> - Package management</li>
-            </ul>
-          </div>
-        </div>
-      </li>
+                    {/* Specializations */}
+                    <li className="mb-12">
+                      <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-70">
+                        <div className={`absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block ${theme === "light" ? "lg:group-hover:bg-blue-50" : "lg:group-hover:bg-slate-800/50"}`}></div>
+                        <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">
+                          Focus Areas
+                        </header>
+                        <div className="z-10 sm:col-span-6">
+                          <h3 className={`font-medium leading-snug ${themeObj.text} mb-3`}>
+                            What I Specialize In
+                          </h3>
+                          <ul className="mt-2 text-sm leading-normal space-y-2">
+                            <li><span className="text-sky-500 font-medium">Full-Stack Web Apps</span> - End-to-end MERN development</li>
+                            <li><span className="text-sky-500 font-medium">AI Integration</span> - OpenAI, Google Gemini, automated workflows</li>
+                            <li><span className="text-sky-500 font-medium">System Architecture</span> - Scalable & role-based platforms</li>
+                            <li><span className="text-sky-500 font-medium">Responsive Design</span> - Mobile-first, cross-browser compatible</li>
+                            <li><span className="text-sky-500 font-medium">API Integration</span> - Third-party services, payment gateways</li>
+                            <li><span className="text-sky-500 font-medium">Performance Optimization</span> - Fast load times, efficient code</li>
 
-      {/* Specializations */}
-      <li className="mb-12">
-        <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-70">
-          <div className={`absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block ${theme === "light" ? "lg:group-hover:bg-blue-50" : "lg:group-hover:bg-slate-800/50"}`}></div>
-          <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">
-            Focus Areas
-          </header>
-          <div className="z-10 sm:col-span-6">
-            <h3 className={`font-medium leading-snug ${themeObj.text} mb-3`}>
-              What I Specialize In
-            </h3>
-            <ul className="mt-2 text-sm leading-normal space-y-2">
-              <li><span className="text-sky-500 font-medium">Full-Stack Web Apps</span> - End-to-end MERN development</li>
-              <li><span className="text-sky-500 font-medium">AI Integration</span> - OpenAI, Google Gemini, automated workflows</li>
-              <li><span className="text-sky-500 font-medium">System Architecture</span> - Scalable & role-based platforms</li>
-              <li><span className="text-sky-500 font-medium">Responsive Design</span> - Mobile-first, cross-browser compatible</li>
-              <li><span className="text-sky-500 font-medium">API Integration</span> - Third-party services, payment gateways</li>
-              <li><span className="text-sky-500 font-medium">Performance Optimization</span> - Fast load times, efficient code</li>
-
-            </ul>
-          </div>
-        </div>
-      </li>
-    </ol>
-  </div>
-</section>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                  </ol>
+                </div>
+              </section>
               {/* Projects Section */}
               <section
                 id="projects"
@@ -532,23 +524,20 @@ const ElegantPortfolio = () => {
                                 className={`font-medium leading-snug ${themeObj.text}`}
                               >
                                 <span
-                                  className={`transition-colors duration-300 ${
-                                    theme === "light"
-                                      ? "group-hover:text-blue-600"
-                                      : "group-hover:text-slate-400"
-                                  }`}
+                                  className={`transition-colors duration-300 ${theme === "light"
+                                    ? "group-hover:text-blue-600"
+                                    : "group-hover:text-slate-400"
+                                    }`}
                                 >
                                   {project.name}
                                 </span>
                               </h3>
                               <p
-                                className={`mt-2 text-sm leading-normal ${
-                                  themeObj.muted
-                                } transition-colors duration-300 ${
-                                  theme === "light"
+                                className={`mt-2 text-sm leading-normal ${themeObj.muted
+                                  } transition-colors duration-300 ${theme === "light"
                                     ? "group-hover:text-gray-900"
                                     : "group-hover:text-slate-400"
-                                }`}
+                                  }`}
                               >
                                 {project.desc}
                               </p>
@@ -559,11 +548,10 @@ const ElegantPortfolio = () => {
                                 {project.tags.map((tag, tagIndex) => (
                                   <li key={tagIndex} className="mr-1.5 mt-2">
                                     <div
-                                      className={`flex items-center rounded-full px-3 py-1 text-xs font-medium leading-5 transition-all duration-300 ${
-                                        theme === "light"
-                                          ? "group-hover:bg-blue-200"
-                                          : "group-hover:bg-slate-700"
-                                      } ${themeObj.tag}`}
+                                      className={`flex items-center rounded-full px-3 py-1 text-xs font-medium leading-5 transition-all duration-300 ${theme === "light"
+                                        ? "group-hover:bg-blue-200"
+                                        : "group-hover:bg-slate-700"
+                                        } ${themeObj.tag}`}
                                     >
                                       {tag}
                                     </div>
@@ -643,22 +631,20 @@ const ElegantPortfolio = () => {
                   </ol>
                   <div className="mt-12">
                     <motion.a
-                      className={`inline-flex items-center leading-tight font-semibold group transition-colors duration-300 ${
-                        theme === "light" 
-                          ? "text-gray-700 hover:text-gray-900" 
-                          : "text-slate-200 hover:text-white"
-                      }`}
+                      className={`inline-flex items-center leading-tight font-semibold group transition-colors duration-300 ${theme === "light"
+                        ? "text-gray-700 hover:text-gray-900"
+                        : "text-slate-200 hover:text-white"
+                        }`}
                       aria-label="View Full Project Archive"
                       href="/projects"
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.2 }}
                     >
                       <span>
-                        <span className={`border-b pb-px transition ${
-                          theme === "light" 
-                            ? "border-gray-300 group-hover:border-gray-900" 
-                            : "border-slate-400 group-hover:border-white"
-                        }`}>
+                        <span className={`border-b pb-px transition ${theme === "light"
+                          ? "border-gray-300 group-hover:border-gray-900"
+                          : "border-slate-400 group-hover:border-white"
+                          }`}>
                           View Full Project Archive
                         </span>
                         <span className="whitespace-nowrap">
@@ -698,7 +684,7 @@ const ElegantPortfolio = () => {
                   <p className={`mb-4 ${themeObj.text}`}>
                     I'm currently seeking new opportunities and would love to hear from you. Whether you have a project in mind, a question about my work, or just want to connect, I'll get back to you as soon as possible!
                   </p>
-                  
+
                   {/* Contact Info Card with Get in Touch and Location */}
                   <div className={`mt-6 p-6 rounded-xl ${themeObj.card} border ${themeObj.border}`}>
                     <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
@@ -709,11 +695,10 @@ const ElegantPortfolio = () => {
                         </h3>
                         <a
                           href="mailto:jabirmahmud456@gmail.com"
-                          className={`inline-flex items-center px-4 py-2 rounded-lg border ${
-                            theme === "light"
-                              ? "border-gray-300 text-gray-700 hover:bg-gray-50"
-                              : "border-gray-600 text-gray-300 hover:bg-gray-800"
-                          } font-medium transition-colors duration-300`}
+                          className={`inline-flex items-center px-4 py-2 rounded-lg border ${theme === "light"
+                            ? "border-gray-300 text-gray-700 hover:bg-gray-50"
+                            : "border-gray-600 text-gray-300 hover:bg-gray-800"
+                            } font-medium transition-colors duration-300`}
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -727,7 +712,7 @@ const ElegantPortfolio = () => {
                           Send email
                         </a>
                       </div>
-                      
+
                       {/* Location */}
                       <div>
                         <h3 className={`text-lg font-semibold ${themeObj.text} mb-3`}>
@@ -814,7 +799,7 @@ const ElegantPortfolio = () => {
                   </div>
                 </div>
               </section>
-              
+
             </main>
           </div>
         </div>

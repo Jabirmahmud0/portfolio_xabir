@@ -59,7 +59,7 @@ function ProjectCard({ project, themeObj }) {
           <Motion.img
             key={index}
             src={photos[index]}
-            alt={`${project.name} screenshot ${index+1}`}
+            alt={`${project.name} screenshot ${index + 1}`}
             className="w-full h-full object-contain object-center cursor-pointer relative z-10 block"
             style={{ display: 'block' }}
             initial={{ opacity: 0, scale: 1.05 }}
@@ -71,13 +71,13 @@ function ProjectCard({ project, themeObj }) {
         </AnimatePresence>
 
         {/* overlay shown on hover */}
-        <Motion.div 
+        <Motion.div
           className="pointer-events-none absolute inset-0 flex items-center justify-center z-10"
           initial={{ opacity: 0 }}
           whileHover={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <Motion.div 
+          <Motion.div
             className="px-6 py-3 rounded-full bg-black/60 text-white text-sm backdrop-blur-md font-medium shadow-lg"
             initial={{ scale: 0.8, y: 10 }}
             whileHover={{ scale: 1, y: 0 }}
@@ -91,9 +91,9 @@ function ProjectCard({ project, themeObj }) {
       {/* controls */}
       {photos.length > 1 && (
         <>
-          <Motion.button 
-            onClick={prev} 
-            aria-label="Previous" 
+          <Motion.button
+            onClick={prev}
+            aria-label="Previous"
             className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-3 hover:bg-black/70 transition-all z-30 backdrop-blur-sm"
             whileHover={{ scale: 1.1, x: -2 }}
             whileTap={{ scale: 0.9 }}
@@ -102,9 +102,9 @@ function ProjectCard({ project, themeObj }) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
             </svg>
           </Motion.button>
-          <Motion.button 
-            onClick={next} 
-            aria-label="Next" 
+          <Motion.button
+            onClick={next}
+            aria-label="Next"
             className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-3 hover:bg-black/70 transition-all z-30 backdrop-blur-sm"
             whileHover={{ scale: 1.1, x: 2 }}
             whileTap={{ scale: 0.9 }}
@@ -116,15 +116,15 @@ function ProjectCard({ project, themeObj }) {
 
           <div className="absolute left-1/2 -translate-x-1/2 bottom-4 flex gap-2 z-30">
             {photos.map((p, idx) => (
-              <Motion.button 
-                key={idx} 
-                onClick={(e)=>{e.stopPropagation(); setIndex(idx);}} 
-                className={`w-10 h-10 rounded-lg overflow-hidden border-2 ${idx===index? 'border-white shadow-lg scale-110': 'border-white/50'} bg-white/20 backdrop-blur-sm transition-all`}
+              <Motion.button
+                key={idx}
+                onClick={(e) => { e.stopPropagation(); setIndex(idx); }}
+                className={`w-10 h-10 rounded-lg overflow-hidden border-2 ${idx === index ? 'border-white shadow-lg scale-110' : 'border-white/50'} bg-white/20 backdrop-blur-sm transition-all`}
                 whileHover={{ scale: 1.15 }}
                 whileTap={{ scale: 0.95 }}
                 animate={{ scale: idx === index ? 1.1 : 1 }}
               >
-                    <img src={p} alt={`thumb-${idx}`} className="w-full h-full object-contain block" style={{ display: 'block' }} />
+                <img src={p} alt={`thumb-${idx}`} className="w-full h-full object-contain block" style={{ display: 'block' }} />
               </Motion.button>
             ))}
           </div>
@@ -142,6 +142,15 @@ const AllProjects = () => {
 
   const projects = [
     // High-demand, industry-impact projects
+    {
+      "name": "TechVault — Premium E-Commerce",
+      "desc": "An enterprise-ready electronics e-commerce platform with Turborepo monorepo architecture, role-based access, and secure payments.",
+      "tags": ["Next.js 16", "Express.js", "PostgreSQL", "Drizzle ORM", "Stripe", "Turborepo", "Docker"],
+      "github": "https://github.com/Jabirmahmud0/techvault",
+      "live": "https://gotechvault.vercel.app",
+      "featured": true,
+      "photos": ["/techvault1.png"]
+    },
     {
       "name": "CareerByAI",
       "desc": "An AI-powered youth career platform that generates personalized career roadmaps, matches jobs, analyzes CVs, and curates learning resources. Uses Google Gemini AI for intelligent guidance, aligned with UN SDG 8.",
@@ -288,26 +297,26 @@ const AllProjects = () => {
         />
       </div>
 
-  <div className="container mx-auto px-4 sm:px-6 py-6 md:px-16 lg:px-32 xl:px-48 md:py-12 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 py-6 md:px-16 lg:px-32 xl:px-48 md:py-12 relative z-10">
         {/* Header */}
-        <Motion.div 
+        <Motion.div
           className="flex justify-between items-center mb-8 md:mb-12"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
           <a href="/" className={`flex items-center ${themeObj.link} font-semibold group transition-all text-base md:text-lg`}>
-            <Motion.svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" 
-              viewBox="0 0 20 20" 
+            <Motion.svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform"
+              viewBox="0 0 20 20"
               fill="currentColor"
             >
               <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
             </Motion.svg>
             Back to Portfolio
           </a>
-          <Motion.button 
+          <Motion.button
             onClick={toggleTheme}
             className={`p-2 md:p-3 rounded-xl ${themeObj.buttonBg} ${themeObj.buttonText} shadow-lg transition-all`}
             whileHover={{ scale: 1.05 }}
@@ -322,9 +331,9 @@ const AllProjects = () => {
                   animate={{ rotate: 0, opacity: 1 }}
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-4 w-4 md:h-5 md:w-5" 
-                  viewBox="0 0 20 20" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4 md:h-5 md:w-5"
+                  viewBox="0 0 20 20"
                   fill="currentColor"
                 >
                   <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
@@ -336,9 +345,9 @@ const AllProjects = () => {
                   animate={{ rotate: 0, opacity: 1 }}
                   exit={{ rotate: -90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-4 w-4 md:h-5 md:w-5" 
-                  viewBox="0 0 20 20" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4 md:h-5 md:w-5"
+                  viewBox="0 0 20 20"
                   fill="currentColor"
                 >
                   <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707a1 1 0 001.414 0zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
@@ -347,9 +356,9 @@ const AllProjects = () => {
             </AnimatePresence>
           </Motion.button>
         </Motion.div>
-        
+
         {/* Title Section */}
-        <Motion.div 
+        <Motion.div
           className="mb-8 md:mb-12 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -366,7 +375,7 @@ const AllProjects = () => {
         </Motion.div>
 
         {/* Search */}
-        <Motion.div 
+        <Motion.div
           className="flex justify-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -396,7 +405,7 @@ const AllProjects = () => {
             </div>
           </div>
         </Motion.div>
-        
+
         {/* Projects Grid */}
         <div className="space-y-8 will-change-transform">
           <AnimatePresence mode="wait">
@@ -420,15 +429,15 @@ const AllProjects = () => {
                         </span>
                       )}
                     </div>
-                    
+
                     <h3 className={`text-3xl font-bold mb-4 ${themeObj.text} ${themeObj.titleHover} transition-all`}>
                       {project.name}
                     </h3>
-                    
+
                     <p className={`mb-6 text-base leading-relaxed ${themeObj.muted}`}>
                       {project.desc}
                     </p>
-                    
+
                     <div className="flex flex-wrap gap-2 mb-6">
                       {project.tags.map((tag, tagIndex) => (
                         <Motion.span
@@ -440,7 +449,7 @@ const AllProjects = () => {
                         </Motion.span>
                       ))}
                     </div>
-                    
+
                     <div className="flex flex-wrap gap-4">
                       <Motion.a
                         href={project.live}
@@ -464,7 +473,7 @@ const AllProjects = () => {
                         </svg>
                         Live Demo
                       </Motion.a>
-                      
+
                       <Motion.a
                         href={project.github}
                         target="_blank"
@@ -481,7 +490,7 @@ const AllProjects = () => {
                         </svg>
                         Source Code
                       </Motion.a>
-                      
+
                       {project.backend && (
                         <Motion.a
                           href={project.backend}
@@ -509,7 +518,7 @@ const AllProjects = () => {
                       )}
                     </div>
                   </div>
-                  
+
                   {/* Project Image / Photos Carousel */}
                   <div className="md:w-1/3 w-full relative overflow-hidden flex items-stretch shrink-0">
                     <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient || 'from-blue-500 to-purple-500'} opacity-20 group-hover:opacity-30 transition-opacity pointer-events-none z-0`} />
