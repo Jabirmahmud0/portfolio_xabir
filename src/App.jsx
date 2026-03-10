@@ -105,6 +105,24 @@ const ElegantPortfolio = () => {
       image: "/techvault1.png",
     },
     {
+      name: "FlowDesk — Real-Time Project Management",
+      desc: "A collaborative project management ecosystem with Kanban boards, multi-workspace environments, real-time document editing, and Stripe subscriptions.",
+      tags: [
+        "Next.js",
+        "TypeScript",
+        "tRPC",
+        "PostgreSQL",
+        "Drizzle ORM",
+        "Redis",
+        "Socket.IO",
+        "Stripe",
+      ],
+      github: "https://github.com/Jabirmahmud0/FlowDesk",
+      live: "https://flowdeskmanager.vercel.app/",
+      featured: true,
+      image: "/FlowdDesk.png",
+    },
+    {
       name: "CareerByAI",
       desc: "An AI-powered youth career platform that generates personalized roadmaps, matches jobs, analyzes CVs, and curates learning resources using Google Gemini AI.",
       tags: [
@@ -122,8 +140,6 @@ const ElegantPortfolio = () => {
       featured: true,
       image: "/CareerByAIImg.png",
     },
-
-    // High-performance full-stack commerce platform
     {
       name: "CureBay",
       desc: "A full-stack healthcare e-commerce platform for medicines, lab tests, and online consultations with secure transactions and role-based dashboards.",

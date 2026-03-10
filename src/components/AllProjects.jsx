@@ -152,6 +152,15 @@ const AllProjects = () => {
       "photos": ["/techvault1.png"]
     },
     {
+      "name": "FlowDesk — Real-Time Project Management",
+      "desc": "A collaborative project management ecosystem with Kanban boards, multi-workspace environments, real-time document editing, and Stripe subscriptions. Features Socket.IO and Redis Pub/Sub for instant cross-client notifications and live state sync.",
+      "tags": ["Next.js", "TypeScript", "tRPC", "PostgreSQL", "Drizzle ORM", "Redis", "Socket.IO", "Stripe"],
+      "github": "https://github.com/Jabirmahmud0/FlowDesk",
+      "live": "https://flowdeskmanager.vercel.app/",
+      "featured": true,
+      "photos": ["/FlowdDesk.png"]
+    },
+    {
       "name": "CareerByAI",
       "desc": "An AI-powered youth career platform that generates personalized career roadmaps, matches jobs, analyzes CVs, and curates learning resources. Uses Google Gemini AI for intelligent guidance, aligned with UN SDG 8.",
       "tags": ["React", "Node.js", "Express", "MongoDB", "Vercel", "Google Gemini AI", "PDF.js"],
@@ -170,6 +179,17 @@ const AllProjects = () => {
       "live": "https://curebayy.vercel.app/",
       "featured": true,
       photos: ["/CureBay.png"],
+    },
+
+    // AI-Powered Developer Tools
+    {
+      "name": "DevKit — AI-Powered Developer Toolbox",
+      "desc": "An AI-powered developer toolbox with 10+ utilities including code review, SQL playground, regex testing, JSON validation, and API debugging. Integrates Vercel AI SDK and Google Gemini for contextual code analysis within a Monaco Editor.",
+      "tags": ["Next.js", "TypeScript", "Vercel AI SDK", "WebAssembly", "Web Workers", "Monaco Editor", "Google Gemini"],
+      "github": "https://github.com/Jabirmahmud0/DevKitAIPoweredDeveloperToolBox",
+      "live": "https://devkitai.vercel.app/",
+      "featured": true,
+      "photos": ["/DevKit.png"]
     },
     {
       name: "NextTalent Job Platform",
