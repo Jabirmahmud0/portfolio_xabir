@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { ThemeContext } from '../ThemeProvider.jsx';
+import SEOHead from './SEOHead.jsx';
 
 // Small carousel component for project photos
 function ProjectCard({ project, themeObj }) {
@@ -289,6 +290,11 @@ const AllProjects = () => {
 
   return (
     <div className={`min-h-screen ${themeObj.bg} transition-all duration-500`}>
+      <SEOHead 
+        title="Project Archive - Jabir Mahmud" 
+        description="A curated collection of full-stack projects, AI-powered tools, and creative explorations by Jabir Mahmud."
+        canonicalUrl="https://jabir.pro.bd/projects"
+      />
       {/* Animated background elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <Motion.div

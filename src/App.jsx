@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 
 import { ThemeContext } from "./ThemeProvider.jsx";
+import SEOHead from "./components/SEOHead.jsx";
 
 // --- Utility: Random Quote Generator ---
 const QUOTES = [
@@ -189,7 +190,8 @@ const ElegantPortfolio = () => {
   // --- Render ---
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div
+      <SEOHead />
+      <main id="main-content" role="main"
         className={`min-h-screen ${themeObj.bg} ${themeObj.text} selection:bg-teal-300 selection:text-teal-900 transition-colors duration-500`}
       >
         {/* Theme Switcher (uses ThemeProvider) */}
@@ -832,7 +834,7 @@ const ElegantPortfolio = () => {
         >
           {quote}
         </div>
-      </div>
+      </main>
     </ThemeContext.Provider>
   );
 };
