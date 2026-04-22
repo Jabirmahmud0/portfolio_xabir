@@ -193,6 +193,47 @@ const AllProjects = () => {
       "photos": ["/DevKit.png"]
     },
     {
+      "name": "TradeGrid — Real-Time Trading Terminal",
+      "desc": "An enterprise-grade cryptocurrency trading dashboard with live WebSocket streaming, high-performance Canvas charts, and order book visualization.",
+      "tags": ["React 19", "TypeScript", "Zustand", "Tailwind CSS", "Canvas", "WebSocket", "Web Workers", "D3"],
+      "github": "https://github.com/Jabirmahmud0/tradegrid",
+      "live": "https://tradegrid-sand.vercel.app",
+      "featured": true,
+      "photos": ["/TradeGrid.png"],
+      "gradient": "from-blue-600 to-indigo-600"
+    },
+    {
+      "name": "CanvasFlow — Infinite Vector Editor",
+      "desc": "A professional-grade vector editing application with an infinite canvas, smart selection, and 60 FPS performance. Built with React 19 and Konva.js for complex 2D rendering.",
+      "tags": ["React 19", "Konva.js", "Zustand", "Tailwind CSS", "Vite 7", "Framer Motion", "Playwright"],
+      "github": "https://github.com/Jabirmahmud0/canvasflow",
+      "live": "https://github.com/Jabirmahmud0/canvasflow",
+      "featured": true,
+      "photos": ["/CanvasFlow.png"],
+      "gradient": "from-indigo-600 to-slate-900"
+    },
+    {
+      "name": "CollabNote — Real-Time Collaborative Notes",
+      "desc": "An intelligent collaborative notes platform with live delta syncing, cursor tracking, and AI-powered summaries using Gemini 2.5 Flash. Features a robust MERN stack backend with Socket.IO and custom API key rotation.",
+      "tags": ["React 19", "Node.js", "Socket.IO", "MongoDB", "Gemini AI", "Tailwind CSS", "Quill.js", "JWT"],
+      "github": "https://github.com/Jabirmahmud0/collabNote_client",
+      "backend": "https://github.com/Jabirmahmud0/collabNote_server",
+      "live": "https://collabnote-six.vercel.app",
+      "featured": true,
+      "photos": ["/CollabNote.png"],
+      "gradient": "from-purple-600 to-indigo-700"
+    },
+    {
+      "name": "OrbitUI — Enterprise React Component Library",
+      "desc": "A production-ready design system and component library focused on accessibility, multi-brand theming, and ESM/CJS packaging. Features 20+ accessible primitives and automated CI/CD for npm publishing.",
+      "tags": ["React", "TypeScript", "Storybook", "Vitest", "Tailwind CSS", "Design Tokens", "npm", "CI/CD"],
+      "github": "https://github.com/Jabirmahmud0/orbitui",
+      "live": "https://github.com/Jabirmahmud0/orbitui",
+      "featured": true,
+      "photos": ["/OrbitUI.png"],
+      "gradient": "from-slate-700 to-slate-900"
+    },
+    {
       name: "NextTalent Job Platform",
       desc: "A comprehensive career platform revolutionizing job search and talent management with intelligent matching and real-time updates.",
       tags: ["React.js", "JavaScript", "Tailwind CSS", "Firebase"],
@@ -201,6 +242,26 @@ const AllProjects = () => {
       featured: true,
       gradient: "from-blue-500 to-cyan-500",
       photos: ["/next.png"]
+    },
+    {
+      "name": "Get Hyped 🚀 — Marketing Portal",
+      "desc": "A high-performance marketing portal featuring fluid responsive design, Lenis smooth scrolling, and advanced micro-interactions. Demonstrates complex UI states like fanned cards and infinite CSS marquees.",
+      "tags": ["React 19", "Vite", "Tailwind CSS v4", "Lenis", "Framer Motion", "UI/UX"],
+      "github": "https://github.com/Jabirmahmud0/gethyped",
+      "live": "https://gethyped-ecru.vercel.app/",
+      "featured": true,
+      "photos": ["/GetHyped.png"],
+      "gradient": "from-pink-600 to-rose-700"
+    },
+    {
+      "name": "GymHub — Fitness Dashboard",
+      "desc": "A premium fitness management ecosystem featuring a robust custom authentication architecture, real-time OTP verification, and high-performance smooth scrolling. Engineered with a pixel-perfect aesthetic and advanced motion systems.",
+      "tags": ["React 19", "Vite 6", "Tailwind CSS 4", "Framer Motion", "Lenis", "React Hook Form", "OTP Auth"],
+      "github": "https://github.com/Jabirmahmud0/muscleTask",
+      "live": "https://muscle-task.vercel.app",
+      "featured": true,
+      "photos": ["/Muscle.png"],
+      "gradient": "from-orange-600 to-red-700"
     },
 
     // Portfolio & personal branding
