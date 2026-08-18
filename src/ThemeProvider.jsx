@@ -1,5 +1,5 @@
 
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useRef, useState } from 'react';
 import themes from './themeConstants';
 
 const ThemeContext = createContext({ theme: 'light', setTheme: () => {}, themes });
@@ -14,8 +14,7 @@ function ThemeProvider({ children }) {
     return 'light';
   });
 
-  // mouse position for global spotlight
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const spotlightRef = useRef(null);
 
   useEffect(() => {
     try {
@@ -27,17 +26,37 @@ function ThemeProvider({ children }) {
     document.documentElement.classList.add(theme);
   }, [theme]);
 
-  // Track mouse position globally so the spotlight can be rendered site-wide
   useEffect(() => {
-    const handleMouseMove = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+    let frameId;
+    const updateSpotlight = (x, y) => {
+      window.cancelAnimationFrame(frameId);
+      frameId = window.requestAnimationFrame(() => {
+        if (spotlightRef.current) {
+          spotlightRef.current.style.background = themes[theme].spotlight(x, y);
+        }
+      });
+    };
+
+    const handleMouseMove = (event) => {
+      updateSpotlight(event.clientX, event.clientY);
+    };
+
+    updateSpotlight(window.innerWidth / 2, window.innerHeight / 2);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, themes }}>
-      {/* Render a global spotlight overlay so the blue hover/light follows the cursor across the whole site */}
-      <div className="pointer-events-none fixed inset-0 z-30 transition duration-300" style={{ background: themes[theme].spotlight(mousePosition.x, mousePosition.y) }} />
+      <div
+        ref={spotlightRef}
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-30 hidden lg:block"
+        style={{ background: themes[theme].spotlight('50vw', '50vh') }}
+      />
       {children}
     </ThemeContext.Provider>
   );

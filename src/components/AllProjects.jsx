@@ -1,636 +1,222 @@
-import { useState, useContext } from 'react';
-import { motion as Motion, AnimatePresence } from 'framer-motion';
-import { ThemeContext } from '../ThemeProvider.jsx';
-import SEOHead from './SEOHead.jsx';
+import { useContext, useMemo, useState } from "react";
+import { motion as Motion, useReducedMotion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ThemeContext } from "../ThemeProvider.jsx";
+import { usePortfolioData } from "../PortfolioDataContext.js";
+import SEOHead from "./SEOHead.jsx";
+import ThemeToggle from "./ThemeToggle.jsx";
+import { ArrowIcon, ExternalIcon } from "./PortfolioUI.jsx";
 
-// Small carousel component for project photos
-function ProjectCard({ project, themeObj }) {
-  const photos = project.photos || [];
-  const [index, setIndex] = useState(0);
+const projectSections = [
+  {
+    id: "full-stack",
+    title: "Full-Stack Applications",
+    shortTitle: "Full-Stack",
+    description: "End-to-end products covering interfaces, APIs, authentication, data, payments, and real-time workflows.",
+  },
+  {
+    id: "ai-tools",
+    title: "AI Engineering & Intelligent Products",
+    shortTitle: "AI Engineering",
+    description: "AI systems built around research pipelines, evidence, structured outputs, streaming progress, and reliable application infrastructure.",
+  },
+  {
+    id: "frontend-ui",
+    title: "Frontend & UI Engineering",
+    shortTitle: "Frontend & UI",
+    description: "Interfaces focused on interaction design, visualization, responsive behavior, and reusable UI systems.",
+  },
+];
 
-  if (!photos.length) {
-    // fallback: show a stylized placeholder with project initial
-    return (
-      <a
-        href={project.live}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block h-full w-full relative z-20 group floating"
-      >
-        <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-10 group-hover:opacity-25 transition-all duration-300`} />
-        <div className="h-full min-h-[300px] flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 relative overflow-hidden">
-          <div className="text-center p-6 transform transition-all duration-300 group-hover:scale-105">
-            <div className={`text-6xl font-bold bg-gradient-to-br ${project.gradient} bg-clip-text text-transparent mb-2 transition-all duration-300`}>
-              {project.name.charAt(0)}
-            </div>
-            <div className={`text-sm ${themeObj.muted} font-medium transition-all duration-300`}>
-              {project.name}
-            </div>
-          </div>
-        </div>
-      </a>
-    );
+function ProjectTitle({ project, className }) {
+  if (project.caseStudy) {
+    return <Link className={className} to={`/projects/${project.slug}`}>{project.name}</Link>;
   }
 
-  const prev = (e) => { e.stopPropagation(); setIndex((i) => (i - 1 + photos.length) % photos.length); };
-  const next = (e) => { e.stopPropagation(); setIndex((i) => (i + 1) % photos.length); };
-
   return (
-    <div className="w-full h-full flex">
-      <a
-        href={project.live}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block relative w-full h-full group"
-      >
-        {/* blurred/color-extended background using the same photo to fill gaps */}
-        <div
-          aria-hidden
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `url(${photos[index]})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            filter: 'blur(18px) saturate(120%)',
-            transform: 'scale(1.08)'
-          }}
-        />
+    <a className={className} href={project.live || project.github} target="_blank" rel="noopener noreferrer">
+      {project.name}
+    </a>
+  );
+}
 
-        <AnimatePresence mode="wait">
-          <Motion.img
-            key={index}
-            src={photos[index]}
-            alt={`${project.name} screenshot ${index + 1}`}
-            className="w-full h-full object-contain object-center cursor-pointer relative z-10 block"
-            style={{ display: 'block' }}
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            whileHover={{ scale: 1.02 }}
-          />
-        </AnimatePresence>
-
-        {/* overlay shown on hover */}
-        <Motion.div
-          className="pointer-events-none absolute inset-0 flex items-center justify-center z-10"
-          initial={{ opacity: 0 }}
-          whileHover={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Motion.div
-            className="px-6 py-3 rounded-full bg-black/60 text-white text-sm backdrop-blur-md font-medium shadow-lg"
-            initial={{ scale: 0.8, y: 10 }}
-            whileHover={{ scale: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            View live
-          </Motion.div>
-        </Motion.div>
-      </a>
-
-      {/* controls */}
-      {photos.length > 1 && (
-        <>
-          <Motion.button
-            onClick={prev}
-            aria-label="Previous"
-            className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-3 hover:bg-black/70 transition-all z-30 backdrop-blur-sm"
-            whileHover={{ scale: 1.1, x: -2 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-            </svg>
-          </Motion.button>
-          <Motion.button
-            onClick={next}
-            aria-label="Next"
-            className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-3 hover:bg-black/70 transition-all z-30 backdrop-blur-sm"
-            whileHover={{ scale: 1.1, x: 2 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </Motion.button>
-
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-4 flex gap-2 z-30">
-            {photos.map((p, idx) => (
-              <Motion.button
-                key={idx}
-                onClick={(e) => { e.stopPropagation(); setIndex(idx); }}
-                className={`w-10 h-10 rounded-lg overflow-hidden border-2 ${idx === index ? 'border-white shadow-lg scale-110' : 'border-white/50'} bg-white/20 backdrop-blur-sm transition-all`}
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.95 }}
-                animate={{ scale: idx === index ? 1.1 : 1 }}
-              >
-                <img src={p} alt={`thumb-${idx}`} className="w-full h-full object-contain block" style={{ display: 'block' }} />
-              </Motion.button>
-            ))}
-          </div>
-        </>
+function ProjectActions({ project, themeObj, alignRight }) {
+  return (
+    <div className={`mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm font-semibold ${alignRight ? "lg:justify-end" : ""}`}>
+      {project.caseStudy && (
+        <Link className={`group inline-flex items-center gap-1.5 ${themeObj.link}`} to={`/projects/${project.slug}`}>
+          Case study <ArrowIcon />
+        </Link>
+      )}
+      {(project.deployments ?? []).map((deployment) => (
+        <a key={deployment.url} className={`group inline-flex items-center gap-1.5 ${themeObj.link}`} href={deployment.url} target="_blank" rel="noopener noreferrer">
+          {deployment.label} <ExternalIcon />
+        </a>
+      ))}
+      {!project.deployments?.length && project.live && (
+        <a className={`group inline-flex items-center gap-1.5 ${themeObj.link}`} href={project.live} target="_blank" rel="noopener noreferrer">
+          Live demo <ExternalIcon />
+        </a>
+      )}
+      {project.github && (
+        <a className={`group inline-flex items-center gap-1.5 ${themeObj.link}`} href={project.github} target="_blank" rel="noopener noreferrer">
+          GitHub <ExternalIcon />
+        </a>
+      )}
+      {project.backend && (
+        <a className={`group inline-flex items-center gap-1.5 ${themeObj.link}`} href={project.backend} target="_blank" rel="noopener noreferrer">
+          Backend <ExternalIcon />
+        </a>
       )}
     </div>
   );
 }
 
-const AllProjects = () => {
-  const { theme, setTheme, themes } = useContext(ThemeContext);
-  const [search, setSearch] = useState('');
-  const themeObj = themes[theme];
-  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
-
-  const projects = [
-    // High-demand, industry-impact projects
-    {
-      "name": "TechVault — Premium E-Commerce",
-      "desc": "An enterprise-ready electronics e-commerce platform with Turborepo monorepo architecture, role-based access, and secure payments.",
-      "tags": ["Next.js 16", "Express.js", "PostgreSQL", "Drizzle ORM", "Stripe", "Turborepo", "Docker"],
-      "github": "https://github.com/Jabirmahmud0/techvault",
-      "live": "https://gotechvault.vercel.app",
-      "featured": true,
-      "photos": ["/techvault1.png"]
-    },
-    {
-      "name": "FlowDesk — Real-Time Project Management",
-      "desc": "A collaborative project management ecosystem with Kanban boards, multi-workspace environments, real-time document editing, and Stripe subscriptions. Features Socket.IO and Redis Pub/Sub for instant cross-client notifications and live state sync.",
-      "tags": ["Next.js", "TypeScript", "tRPC", "PostgreSQL", "Drizzle ORM", "Redis", "Socket.IO", "Stripe"],
-      "github": "https://github.com/Jabirmahmud0/FlowDesk",
-      "live": "https://flowdeskmanager.vercel.app/",
-      "featured": true,
-      "photos": ["/FlowdDesk.png"]
-    },
-    {
-      "name": "CareerByAI",
-      "desc": "An AI-powered youth career platform that generates personalized career roadmaps, matches jobs, analyzes CVs, and curates learning resources. Uses Google Gemini AI for intelligent guidance, aligned with UN SDG 8.",
-      "tags": ["React", "Node.js", "Express", "MongoDB", "Vercel", "Google Gemini AI", "PDF.js"],
-      "github": "https://github.com/Jabirmahmud0/AI_career_Client",
-      "backend": "https://github.com/Jabirmahmud0/AI_career_Server",
-      "live": "https://careerbyai.vercel.app/",
-      "featured": true,
-      "photos": ["/CareerByAIImg.png"]
-    },
-    {
-      "name": "CureBay",
-      "desc": "A full-stack healthcare e-commerce platform for medicines, lab tests, and online consultations with role-based dashboards.",
-      "tags": ["React", "Vite", "Tailwind", "Express", "MongoDB", "Stripe", "Firebase"],
-      "github": "https://github.com/Jabirmahmud0/CureBay_Client",
-      "backend": "https://github.com/Jabirmahmud0/CureBay_Backend",
-      "live": "https://curebayy.vercel.app/",
-      "featured": true,
-      photos: ["/CureBay.png"],
-    },
-
-    // AI-Powered Developer Tools
-    {
-      "name": "DevKit — AI-Powered Developer Toolbox",
-      "desc": "An AI-powered developer toolbox with 10+ utilities including code review, SQL playground, regex testing, JSON validation, and API debugging. Integrates Vercel AI SDK and Google Gemini for contextual code analysis within a Monaco Editor.",
-      "tags": ["Next.js", "TypeScript", "Vercel AI SDK", "WebAssembly", "Web Workers", "Monaco Editor", "Google Gemini"],
-      "github": "https://github.com/Jabirmahmud0/DevKitAIPoweredDeveloperToolBox",
-      "live": "https://devkitai.vercel.app/",
-      "featured": true,
-      "photos": ["/DevKit.png"]
-    },
-    {
-      "name": "TradeGrid — Real-Time Trading Terminal",
-      "desc": "An enterprise-grade cryptocurrency trading dashboard with live WebSocket streaming, high-performance Canvas charts, and order book visualization.",
-      "tags": ["React 19", "TypeScript", "Zustand", "Tailwind CSS", "Canvas", "WebSocket", "Web Workers", "D3"],
-      "github": "https://github.com/Jabirmahmud0/tradegrid",
-      "live": "https://tradegrid-sand.vercel.app",
-      "featured": true,
-      "photos": ["/TradeGrid.png"],
-      "gradient": "from-blue-600 to-indigo-600"
-    },
-    {
-      "name": "CanvasFlow — Infinite Vector Editor",
-      "desc": "A professional-grade vector editing application with an infinite canvas, smart selection, and 60 FPS performance. Built with React 19 and Konva.js for complex 2D rendering.",
-      "tags": ["React 19", "Konva.js", "Zustand", "Tailwind CSS", "Vite 7", "Framer Motion", "Playwright"],
-      "github": "https://github.com/Jabirmahmud0/canvasflow",
-      "live": "https://github.com/Jabirmahmud0/canvasflow",
-      "featured": true,
-      "photos": ["/CanvasFlow.png"],
-      "gradient": "from-indigo-600 to-slate-900"
-    },
-    {
-      "name": "CollabNote — Real-Time Collaborative Notes",
-      "desc": "An intelligent collaborative notes platform with live delta syncing, cursor tracking, and AI-powered summaries using Gemini 2.5 Flash. Features a robust MERN stack backend with Socket.IO and custom API key rotation.",
-      "tags": ["React 19", "Node.js", "Socket.IO", "MongoDB", "Gemini AI", "Tailwind CSS", "Quill.js", "JWT"],
-      "github": "https://github.com/Jabirmahmud0/collabNote_client",
-      "backend": "https://github.com/Jabirmahmud0/collabNote_server",
-      "live": "https://collabnote-six.vercel.app",
-      "featured": true,
-      "photos": ["/CollabNote.png"],
-      "gradient": "from-purple-600 to-indigo-700"
-    },
-    {
-      "name": "OrbitUI — Enterprise React Component Library",
-      "desc": "A production-ready design system and component library focused on accessibility, multi-brand theming, and ESM/CJS packaging. Features 20+ accessible primitives and automated CI/CD for npm publishing.",
-      "tags": ["React", "TypeScript", "Storybook", "Vitest", "Tailwind CSS", "Design Tokens", "npm", "CI/CD"],
-      "github": "https://github.com/Jabirmahmud0/orbitui",
-      "live": "https://github.com/Jabirmahmud0/orbitui",
-      "featured": true,
-      "photos": ["/OrbitUI.png"],
-      "gradient": "from-slate-700 to-slate-900"
-    },
-    {
-      name: "NextTalent Job Platform",
-      desc: "A comprehensive career platform revolutionizing job search and talent management with intelligent matching and real-time updates.",
-      tags: ["React.js", "JavaScript", "Tailwind CSS", "Firebase"],
-      github: "https://github.com/Jabirmahmud0/NextTalent_Client",
-      live: "https://next-talent-client.vercel.app",
-      featured: true,
-      gradient: "from-blue-500 to-cyan-500",
-      photos: ["/next.png"]
-    },
-    {
-      "name": "Get Hyped 🚀 — Marketing Portal",
-      "desc": "A high-performance marketing portal featuring fluid responsive design, Lenis smooth scrolling, and advanced micro-interactions. Demonstrates complex UI states like fanned cards and infinite CSS marquees.",
-      "tags": ["React 19", "Vite", "Tailwind CSS v4", "Lenis", "Framer Motion", "UI/UX"],
-      "github": "https://github.com/Jabirmahmud0/gethyped",
-      "live": "https://gethyped-ecru.vercel.app/",
-      "featured": true,
-      "photos": ["/GetHyped.png"],
-      "gradient": "from-pink-600 to-rose-700"
-    },
-    {
-      "name": "GymHub — Fitness Dashboard",
-      "desc": "A premium fitness management ecosystem featuring a robust custom authentication architecture, real-time OTP verification, and high-performance smooth scrolling. Engineered with a pixel-perfect aesthetic and advanced motion systems.",
-      "tags": ["React 19", "Vite 6", "Tailwind CSS 4", "Framer Motion", "Lenis", "React Hook Form", "OTP Auth"],
-      "github": "https://github.com/Jabirmahmud0/muscleTask",
-      "live": "https://muscle-task.vercel.app",
-      "featured": true,
-      "photos": ["/Muscle.png"],
-      "gradient": "from-orange-600 to-red-700"
-    },
-
-    // Portfolio & personal branding
-    {
-      name: "Portfolio Website",
-      desc: "A stunning, responsive portfolio template with smooth animations and modern UI/UX practices.",
-      tags: ["Next.js", "TypeScript", "Framer Motion"],
-      github: "https://github.com/Jabirmahmud0/portfolio_xabir",
-      live: "https://jabir-chi.vercel.app/",
-      featured: true,
-      gradient: "from-teal-500 to-emerald-500",
-      photos: ["/portfolio.png"]
-    },
-    {
-      name: "FolioXe",
-      desc: "A modern, versatile web application emphasizing performance, scalability, and clean UI.",
-      tags: ["React", "Firebase", "Tailwind"],
-      github: "https://github.com/Jabirmahmud0/folioxe",
-      live: "https://folioxe.vercel.app",
-      featured: true,
-      gradient: "from-purple-500 to-pink-500",
-      photos: ["/Folioxe.png"]
-    },
-
-    // Commercial-style applications
-    {
-      name: "Comfort Inn (Hotel Booking App)",
-      desc: "Hotel booking application with interactive maps, personalized booking dashboard, dark/light mode, and secure auth.",
-      tags: ["React", "Vite", "TailwindCSS", "Firebase", "Leaflet"],
-      github: "https://github.com/Jabirmahmud0/comfortin",
-      live: "https://comfortin-five.vercel.app",
-      featured: true,
-      gradient: "from-amber-500 to-rose-500",
-      photos: ["/Comfort.png"]
-    },
-    {
-      name: "CozyFind (Real Estate App)",
-      desc: "Real estate web application with advanced property search, wishlist functionality, and responsive interface.",
-      tags: ["React", "Vite", "TailwindCSS", "Firebase", "React Router"],
-      github: "https://github.com/Jabirmahmud0/CozyFind",
-      live: "https://cozy-find.vercel.app/",
-      featured: true,
-      gradient: "from-emerald-500 to-teal-400",
-      photos: ["/Cozy.png"]
-    },
-
-    // Creative marketing / interactive
-    {
-      name: "Neon 3D Marketing Site",
-      desc: "Static marketing website with neon 3D visuals, responsive layout, and animated UI components.",
-      tags: ["HTML5", "CSS3", "JavaScript", "jQuery", "Responsive Design"],
-      github: "https://github.com/Jabirmahmud0/Nebula_Marketing",
-      live: "https://nebula-marketing.vercel.app/",
-      featured: false,
-      gradient: "from-pink-500 to-cyan-400",
-      photos: ["/Nebula.png"]
-    },
-
-    // Standard projects (low priority)
-    {
-      name: "OrBexa (E-Commerce Website)",
-      desc: "Architectural e-commerce website with elegant animations and complete product system.",
-      tags: ["HTML5", "CSS3", "JavaScript", "Lottie Animations", "E-Commerce"],
-      github: "https://github.com/Jabirmahmud0/OrBexa_ECommerce",
-      live: "https://orbexaecommerce.vercel.app",
-      featured: false,
-      gradient: "from-gray-800 to-blue-400",
-      photos: ["/Orbexa.png"]
-    },
-
-  ];
-
-  const normalizedSearch = search.trim().toLowerCase();
-
-  const filteredProjects = projects.filter((p) => {
-    // If there's an active search, search across all projects
-    if (normalizedSearch) {
-      const inName = p.name.toLowerCase().includes(normalizedSearch);
-      const inDesc = (p.desc || '').toLowerCase().includes(normalizedSearch);
-      const inTags = (p.tags || []).some(t => t.toLowerCase().includes(normalizedSearch));
-      return inName || inDesc || inTags;
-    }
-
-    // Show all projects by default (no category filtering)
-    return true;
-  });
+function EditorialProject({ project, index, themeObj, reduceMotion }) {
+  const alignRight = index % 2 === 1;
+  const destination = project.live || project.github || project.deployments?.[0]?.url;
 
   return (
-    <div className={`min-h-screen ${themeObj.bg} transition-all duration-500`}>
-      <SEOHead 
-        title="Project Archive - Jabir Mahmud" 
-        description="A curated collection of full-stack projects, AI-powered tools, and creative explorations by Jabir Mahmud."
-        canonicalUrl="https://jabir.pro.bd/projects"
-      />
-      {/* Animated background elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <Motion.div
-          className={`absolute -top-40 -right-40 w-80 h-80 ${theme === 'light' ? 'bg-teal-200' : 'bg-teal-800'} rounded-full opacity-20 blur-3xl`}
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 90, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
+    <Motion.article
+      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.45 }}
+      className="group relative grid items-center lg:grid-cols-12"
+    >
+      <a
+        href={destination}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Open ${project.live ? "live demo" : "GitHub repository"} for ${project.name}`}
+        className={`relative order-1 overflow-hidden rounded-xl border p-4 shadow-sm lg:row-start-1 lg:col-span-7 ${alignRight ? "lg:col-start-1" : "lg:col-start-6"} ${themeObj.media} ${themeObj.border}`}
+      >
+        <img
+          src={project.image}
+          alt={`${project.name} interface`}
+          width="960"
+          height="600"
+          loading="lazy"
+          decoding="async"
+          className="aspect-[16/10] w-full object-contain transition-transform duration-500 group-hover:scale-[1.015]"
         />
-        <Motion.div
-          className={`absolute -bottom-40 -left-40 w-80 h-80 ${theme === 'light' ? 'bg-blue-200' : 'bg-blue-800'} rounded-full opacity-20 blur-3xl`}
-          animate={{
-            scale: [1.2, 1, 1.2],
-            rotate: [90, 0, 90],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-      </div>
+        <span aria-hidden="true" className="absolute inset-0 bg-[#00786B]/10 opacity-40 transition-opacity duration-300 group-hover:opacity-0" />
+      </a>
 
-      <div className="container mx-auto px-4 sm:px-6 py-6 md:px-16 lg:px-32 xl:px-48 md:py-12 relative z-10">
-        {/* Header */}
-        <Motion.div
-          className="flex justify-between items-center mb-8 md:mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <a href="/" className={`flex items-center ${themeObj.link} font-semibold group transition-all text-base md:text-lg`}>
-            <Motion.svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-            </Motion.svg>
-            Back to Portfolio
-          </a>
-          <Motion.button
-            onClick={toggleTheme}
-            className={`p-2 md:p-3 rounded-xl ${themeObj.buttonBg} ${themeObj.buttonText} shadow-lg transition-all`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Toggle theme"
-          >
-            <AnimatePresence mode="wait">
-              {theme === 'light' ? (
-                <Motion.svg
-                  key="moon"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 md:h-5 md:w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                </Motion.svg>
-              ) : (
-                <Motion.svg
-                  key="sun"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 md:h-5 md:w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707a1 1 0 001.414 0zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                </Motion.svg>
-              )}
-            </AnimatePresence>
-          </Motion.button>
-        </Motion.div>
-
-        {/* Title Section */}
-        <Motion.div
-          className="mb-8 md:mb-12 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-3 md:mb-4 ${themeObj.text}`}>
-            <span className={`bg-gradient-to-r ${themeObj.gradientText} bg-clip-text text-transparent`}>
-              Project Archive
-            </span>
-          </h1>
-          <p className={`text-base md:text-lg lg:text-xl ${themeObj.muted} max-w-2xl mx-auto px-2`}>
-            A curated collection of my work, experiments, and creative explorations
-          </p>
-        </Motion.div>
-
-        {/* Search */}
-        <Motion.div
-          className="flex justify-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          {/* small search input */}
-          <div className="flex items-center gap-2">
-            <label htmlFor="project-search" className="sr-only">Search projects</label>
-            <div className={`flex items-center px-3 py-2 rounded-full border ${themeObj.border} ${themeObj.buttonBg} ${themeObj.buttonText} shadow-sm`}>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1116.65 6.65a7.5 7.5 0 010 10.6z" />
-              </svg>
-              <input
-                id="project-search"
-                type="text"
-                inputMode="search"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search"
-                className={`bg-transparent outline-none appearance-none text-sm placeholder-slate-400 ${themeObj.text} w-36 md:w-48`}
-              />
-              {search && (
-                <button onClick={() => setSearch('')} aria-label="Clear search" className="ml-2 text-slate-400 hover:text-slate-600">
-                  ✕
-                </button>
-              )}
-            </div>
-          </div>
-        </Motion.div>
-
-        {/* Projects Grid */}
-        <div className="space-y-8 will-change-transform">
-          <AnimatePresence mode="wait">
-            {filteredProjects.map((project) => (
-              <Motion.div
-                key={project.name}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.28, ease: 'easeInOut' }}
-                className={`${themeObj.card} ${themeObj.cardHover} border ${themeObj.border} rounded-2xl overflow-hidden shadow-xl transition-all duration-300 group will-change-transform`}
-                whileHover={{ y: -5 }}
-              >
-                <div className="flex flex-col md:flex-row items-stretch h-full">
-                  {/* Project Details */}
-                  <div className="p-8 md:w-2/3 flex flex-col justify-center shrink-0">
-                    <div className="flex items-center gap-3 mb-4">
-                      {project.featured && (
-                        <span className={`px-3 py-1 bg-gradient-to-r ${themeObj.featuredTag} text-white text-xs font-bold rounded-full shadow-md`}>
-                          ⭐ Featured
-                        </span>
-                      )}
-                    </div>
-
-                    <h3 className={`text-3xl font-bold mb-4 ${themeObj.text} ${themeObj.titleHover} transition-all`}>
-                      {project.name}
-                    </h3>
-
-                    <p className={`mb-6 text-base leading-relaxed ${themeObj.muted}`}>
-                      {project.desc}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.tags.map((tag, tagIndex) => (
-                        <Motion.span
-                          key={tagIndex}
-                          className={`${themeObj.tag} text-xs px-4 py-2 rounded-lg font-semibold shadow-sm`}
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          {tag}
-                        </Motion.span>
-                      ))}
-                    </div>
-
-                    <div className="flex flex-wrap gap-4">
-                      <Motion.a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`flex items-center ${themeObj.link} font-semibold transition-all group/link`}
-                        whileHover={{ x: 5 }}
-                      >
-                        <svg
-                          className="h-5 w-5 mr-2 group-hover/link:rotate-45 transition-transform"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                          />
-                        </svg>
-                        Live Demo
-                      </Motion.a>
-
-                      <Motion.a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`flex items-center ${themeObj.link} font-semibold transition-all`}
-                        whileHover={{ x: 5 }}
-                      >
-                        <svg
-                          className="h-5 w-5 mr-2"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                        </svg>
-                        Source Code
-                      </Motion.a>
-
-                      {project.backend && (
-                        <Motion.a
-                          href={project.backend}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`flex items-center ${themeObj.link} font-semibold transition-all`}
-                          whileHover={{ x: 5 }}
-                        >
-                          <svg
-                            className="h-5 w-5 mr-2"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              d="M2.4 10.8v8.4c0 1.2.8 2 2 2h15.2c1.2 0 2-.8 2-2v-8.4M12 13.6l9.6-2.8M12 13.6l-9.6-2.8M12 13.6v8.8M4 7.6l9.6 3.2 9.6-3.2c.8-.4.8-1.6 0-2L12.8 2.4c-.8-.4-2-.4-2.8 0L2.4 5.6c-.8.4-.8 1.6 0 2z"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                          Backend
-                        </Motion.a>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Project Image / Photos Carousel */}
-                  <div className="md:w-1/3 w-full relative overflow-hidden flex items-stretch shrink-0">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient || 'from-blue-500 to-purple-500'} opacity-20 group-hover:opacity-30 transition-opacity pointer-events-none z-0`} />
-                    <ProjectCard project={project} themeObj={themeObj} />
-                  </div>
-                </div>
-              </Motion.div>
-            ))}
-          </AnimatePresence>
+      <div className={`relative z-10 order-2 mt-6 flex flex-col lg:row-start-1 lg:col-span-6 lg:mt-0 lg:py-10 ${alignRight ? "lg:col-start-7 lg:items-end lg:text-right" : "lg:col-start-1 lg:items-start"}`}>
+        <div className={`flex flex-wrap items-center gap-2 text-xs font-semibold ${alignRight ? "lg:justify-end" : ""}`}>
+          <span className={themeObj.accent}>{project.status}</span>
+          {project.featured && <span className={themeObj.muted}>Featured</span>}
+          <span className={themeObj.muted}>/ {project.category}</span>
         </div>
 
-        {/* Footer Stats */}
-        <Motion.div
-          className="mt-16 text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          <p className={`${themeObj.muted} text-sm`}>
-            Showing {filteredProjects.length} of {projects.length} projects
-          </p>
-        </Motion.div>
-      </div>
-    </div>
-  );
-};
+        <h3 className="mt-2">
+          <ProjectTitle
+            project={project}
+            className={`group/title inline-flex items-center gap-2 text-2xl font-bold tracking-tight md:text-3xl ${themeObj.text} ${themeObj.cardTitleHover}`}
+          />
+        </h3>
 
-export default AllProjects;
+        <div className={`mt-5 w-full max-w-xl rounded-xl border p-5 shadow-lg md:p-6 ${themeObj.card} ${themeObj.border}`}>
+          <p className={`leading-7 ${themeObj.muted}`}>{project.desc}</p>
+        </div>
+
+        <ul className={`mt-5 flex max-w-xl flex-wrap gap-x-5 gap-y-2 font-mono text-xs ${themeObj.muted} ${alignRight ? "lg:justify-end" : ""}`} aria-label="Technologies used">
+          {project.tags.slice(0, 6).map((tag) => <li key={tag}>{tag}</li>)}
+        </ul>
+
+        <ProjectActions project={project} themeObj={themeObj} alignRight={alignRight} />
+      </div>
+    </Motion.article>
+  );
+}
+
+export default function AllProjects() {
+  const { theme, themes } = useContext(ThemeContext);
+  const themeObj = themes[theme];
+  const reduceMotion = useReducedMotion();
+  const [search, setSearch] = useState("");
+  const { projects } = usePortfolioData();
+
+  const filteredProjects = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    if (!query) return projects;
+    return projects.filter((project) => [project.name, project.desc, project.category, project.status, ...project.tags].join(" ").toLowerCase().includes(query));
+  }, [projects, search]);
+
+  const visibleSections = useMemo(() => projectSections
+    .map((section) => ({ ...section, projects: filteredProjects.filter((project) => project.section === section.id) }))
+    .filter((section) => section.projects.length > 0), [filteredProjects]);
+
+  return (
+    <main className={`min-h-screen ${themeObj.bg} ${themeObj.text} transition-colors duration-300`}>
+      <SEOHead title="Projects - Jabir Mahmud" description="Full-stack applications, AI products, developer tools, and frontend engineering projects by Jabir Mahmud." canonicalUrl="https://jabir.pro.bd/projects" />
+
+      <div className="mx-auto max-w-7xl px-6 py-8 md:px-10 md:py-12 lg:px-14">
+        <header className="flex items-center justify-between gap-4">
+          <Link to="/" className={`group inline-flex items-center gap-2 text-sm font-semibold ${themeObj.link}`}>
+            <span aria-hidden="true" className="transition-transform group-hover:-translate-x-1">&larr;</span> Portfolio
+          </Link>
+          <ThemeToggle />
+        </header>
+
+        <section className="max-w-4xl pb-12 pt-16 md:pb-16 md:pt-24">
+          <p className={`text-sm font-semibold uppercase tracking-[0.18em] ${themeObj.accent}`}>Projects by focus</p>
+          <h1 className={`mt-4 text-4xl font-bold tracking-tight md:text-6xl ${themeObj.text}`}>Things I've built</h1>
+          <p className={`mt-5 max-w-2xl text-lg leading-relaxed ${themeObj.muted}`}>
+            Full-stack products, AI engineering systems, and frontend work. Each project links to a live build or its GitHub repository.
+          </p>
+        </section>
+
+        <nav className={`mb-10 flex flex-wrap gap-3 border-y py-4 ${themeObj.border}`} aria-label="Project sections">
+          {projectSections.map((section, index) => (
+            <a key={section.id} href={`#${section.id}`} className={`rounded-full border px-4 py-2 text-sm font-semibold ${themeObj.border} ${themeObj.buttonBg} ${themeObj.buttonText}`}>
+              {String(index + 1).padStart(2, "0")}. {section.shortTitle}
+            </a>
+          ))}
+        </nav>
+
+        <div className="mb-20 max-w-xl">
+          <label htmlFor="project-search" className="sr-only">Search projects by name, category, or technology</label>
+          <div className={`flex items-center rounded-xl border px-4 py-3 transition-colors focus-within:border-[#00786B] ${themeObj.card} ${themeObj.border}`}>
+            <svg aria-hidden="true" className={`mr-3 h-5 w-5 ${themeObj.muted}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+            <input id="project-search" type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search React, AI, PostgreSQL..." className={`w-full bg-transparent outline-none ${themeObj.text}`} />
+          </div>
+          <p aria-live="polite" className={`mt-3 text-sm ${themeObj.muted}`}>{filteredProjects.length} {filteredProjects.length === 1 ? "project" : "projects"}</p>
+        </div>
+
+        <div className="space-y-28 md:space-y-36">
+          {visibleSections.map((section, sectionIndex) => (
+            <section key={section.id} id={section.id} className="scroll-mt-8" aria-labelledby={`${section.id}-heading`}>
+              <div className={`mb-14 flex flex-col justify-between gap-5 border-b pb-6 md:flex-row md:items-end ${themeObj.border}`}>
+                <div>
+                  <p className={`text-xs font-bold uppercase tracking-[0.18em] ${themeObj.accent}`}>{String(sectionIndex + 1).padStart(2, "0")}</p>
+                  <h2 id={`${section.id}-heading`} className={`mt-2 text-3xl font-bold tracking-tight md:text-4xl ${themeObj.text}`}>{section.title}</h2>
+                  <p className={`mt-3 max-w-2xl leading-relaxed ${themeObj.muted}`}>{section.description}</p>
+                </div>
+                <p className={`shrink-0 font-mono text-sm ${themeObj.muted}`}>{section.projects.length} {section.projects.length === 1 ? "project" : "projects"}</p>
+              </div>
+
+              <div className="space-y-20 lg:space-y-28">
+                {section.projects.map((project, index) => (
+                  <EditorialProject key={project.slug} project={project} index={index} themeObj={themeObj} reduceMotion={reduceMotion} />
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+
+        {visibleSections.length === 0 && (
+          <div className={`rounded-2xl border p-10 text-center ${themeObj.card} ${themeObj.border}`}>
+            <h2 className={`text-xl font-semibold ${themeObj.text}`}>No matching project</h2>
+            <p className={`mt-2 ${themeObj.muted}`}>Try a technology such as React, TypeScript, AI, or Firebase.</p>
+          </div>
+        )}
+
+        <footer className={`mt-28 border-t py-8 text-center text-sm ${themeObj.border} ${themeObj.muted}`}>
+          Want to discuss one of these projects? <a className={themeObj.link} href="mailto:jaabirmahmud01@gmail.com">Email me</a>.
+        </footer>
+      </div>
+    </main>
+  );
+}

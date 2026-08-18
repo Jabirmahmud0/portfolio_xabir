@@ -2,14 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jabir.pro.bd/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://jabir.pro.bd/projects</loc>
-    <lastmod>2026-03-30</lastmod>
+    <lastmod>2026-08-18</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
+  <url><loc>https://jabir.pro.bd/projects/nexdokandar</loc><lastmod>2026-08-18</lastmod><priority>0.9</priority></url>
+  <url><loc>https://jabir.pro.bd/projects/leadlens</loc><lastmod>2026-08-18</lastmod><priority>0.9</priority></url>
+  <url><loc>https://jabir.pro.bd/projects/neuroscout-ai</loc><lastmod>2026-08-18</lastmod><priority>0.9</priority></url>
+  <url><loc>https://jabir.pro.bd/projects/techvault</loc><lastmod>2026-08-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://jabir.pro.bd/projects/flowdesk</loc><lastmod>2026-08-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://jabir.pro.bd/projects/careerbyai</loc><lastmod>2026-08-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://jabir.pro.bd/projects/curebay</loc><lastmod>2026-08-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://jabir.pro.bd/projects/devkit</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://jabir.pro.bd/projects/collabnote</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
 </urlset>

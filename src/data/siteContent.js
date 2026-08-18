@@ -1,0 +1,80 @@
+export const fallbackSections = {
+  site: {
+    title: "Jabir Mahmud - Junior Software Engineer",
+    description: "Portfolio of Jabir Mahmud, a junior software engineer building full-stack, frontend, and AI-powered applications with React, Next.js, Node.js, PostgreSQL, and MongoDB.",
+    canonicalUrl: "https://jabir.pro.bd/",
+  },
+  profile: {
+    eyebrow: "Junior Software Engineer",
+    name: "Jabir Mahmud",
+    focusAreas: ["Full-Stack Engineering", "Frontend Engineering", "AI Engineering"],
+    intro: "I like building the whole thing, from the React interface to the Node.js API and database behind it. Real-time features and AI integrations are usually the parts I enjoy most.",
+    availability: "Looking for my first engineering role",
+    resumeUrl: "/Jabir_Mahmud_Full_Stack_AI_Engineer_Resume.pdf",
+    email: "jaabirmahmud01@gmail.com",
+    socialLinks: [
+      { label: "GitHub", url: "https://github.com/Jabirmahmud0" },
+      { label: "LinkedIn", url: "https://www.linkedin.com/in/jabirmahmud0" },
+      { label: "X", url: "https://x.com/Jabirmahmud0" },
+    ],
+  },
+  about: {
+    paragraphs: [
+      "Hi, I'm Jabir. I recently finished my CSE degree at Daffodil International University. I got into full-stack development because I wanted to understand what happens after someone clicks a button, from the interface they see to the API and database behind it.",
+      "Most of what I know came from building complete projects. Lately, that has meant a prospect-research SaaS with a durable AI pipeline and a FastAPI research assistant that searches the live web and builds cited reports. I still enjoy the less glamorous parts too: authentication, database boundaries, retries, and tracking down the small bugs between systems.",
+      "I'm now looking for my first full-time role in full-stack, frontend, or AI engineering. I still have plenty to learn, so I want a team that gives honest feedback and trusts me with useful work.",
+    ],
+    lightImage: "/jabir10.webp",
+    darkImage: "/jabir11.webp",
+  },
+  skills: {
+    groups: [
+      { label: "Frontend", title: "Interfaces and application state", items: [
+        { name: "React & Next.js", detail: "component architecture, routing, server rendering" },
+        { name: "TypeScript", detail: "type-safe application and API boundaries" },
+        { name: "Tailwind CSS", detail: "responsive, accessible interface systems" },
+        { name: "TanStack Query & Zustand", detail: "server and client state" },
+      ] },
+      { label: "Backend", title: "APIs, data, and authentication", items: [
+        { name: "Node.js, Express & FastAPI", detail: "REST APIs, async services, and background workers" },
+        { name: "PostgreSQL & MongoDB", detail: "relational and document data modeling" },
+        { name: "Drizzle ORM & Zod", detail: "queries, schemas, and validation" },
+        { name: "JWT, OAuth & Firebase", detail: "authentication and role-based access" },
+      ] },
+      { label: "AI Engineering", title: "LLM systems, research, and reliability", items: [
+        { name: "LLM orchestration", detail: "multi-stage planning, extraction, critique, synthesis, and repair" },
+        { name: "Evidence-grounded outputs", detail: "source attribution, confidence boundaries, and schema validation" },
+        { name: "Web research pipelines", detail: "bounded crawling, live search, page extraction, and evidence collection" },
+        { name: "Gemini & Groq", detail: "provider fallback, key rotation, retries, and structured outputs" },
+      ] },
+      { label: "Product", title: "Integrations and delivery", items: [
+        { name: "SSE, Socket.IO & Redis", detail: "streaming, real-time collaboration, and notifications" },
+        { name: "Stripe", detail: "checkout, subscriptions, and webhook handling" },
+        { name: "Sentry & PostHog", detail: "error monitoring, product analytics, and AI telemetry" },
+        { name: "Vercel & Render", detail: "frontend and API deployment workflows" },
+      ] },
+      { label: "Quality", title: "Testing and maintainability", items: [
+        { name: "Vitest & React Testing Library", detail: "unit and component testing" },
+        { name: "Playwright", detail: "browser-level workflow validation" },
+        { name: "ESLint & CI", detail: "automated code-quality checks" },
+        { name: "Accessibility", detail: "semantic structure, keyboard use, and reduced motion" },
+      ] },
+    ],
+  },
+  education: {
+    degree: "B.Sc. in Computer Science and Engineering",
+    institution: "Daffodil International University",
+    graduation: "Graduated December 2025",
+    certificationLabel: "Certifications - July 2025",
+    certifications: [
+      "Responsive Web Design - freeCodeCamp",
+      "Front End Development Libraries - freeCodeCamp",
+    ],
+  },
+  contact: {
+    kicker: "Let's work together",
+    headline: "I'm looking for a junior software engineering role.",
+    body: "I'm especially interested in full-stack, frontend, and AI engineering work. If your team is hiring in Dhaka or remotely, I'd be happy to talk about the problems I could help solve.",
+    locationLine: "Dhaka, Bangladesh - Open to on-site, hybrid, and remote roles",
+  },
+};

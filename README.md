@@ -1,103 +1,94 @@
-# Jabir Mahmud - Portfolio Website
+# Jabir Mahmud - Portfolio
 
-A modern, responsive portfolio website built with React, Vite, and Tailwind CSS.
+Portfolio website for Jabir Mahmud, a junior software engineer focused on full-stack, frontend, and AI engineering roles.
 
-## Features
+Live site: [jabir.pro.bd](https://jabir.pro.bd/)
 
-- **Responsive Design**: Works on all device sizes
-- **Dark/Light Theme**: Toggle between themes
-- **Smooth Animations**: Using Framer Motion
-- **Project Showcase**: Display projects with tags and links
-- **Experience Timeline**: Professional experience section
-- **Contact Information**: Easy ways to get in touch
-- **Performance Optimized**: Fast loading times
+## What is included
 
-## Security Features
+- Clear positioning across full-stack, frontend, and AI engineering
+- Education and certifications
+- Four selected projects on the homepage
+- Searchable project archive with explicit deployment status
+- Evidence-focused case studies for six projects
+- Live demo, frontend GitHub, and backend GitHub links where available
+- Responsive light and dark themes
+- Semantic landmarks, keyboard focus styles, and reduced-motion support
+- Route-specific title, description, canonical, Open Graph, and Twitter metadata
+- Database-aware XML sitemap with a static fallback
+- Password-protected portfolio administration at `/jabir`
+- In-dashboard password changes with current-password verification and session revocation
+- Neon Postgres-backed projects and site content with static fallback
 
-- **External Link Protection**: All external links use `rel="noopener noreferrer"`
-- **Content Security Policy**: Implemented CSP headers to prevent XSS attacks
-- **Secure Headers**: Added security headers for additional protection
-- **Dependency Management**: Regular security audits and updates
+## Stack
 
-## Technologies Used
-
-- React 18
-- Vite
-- Tailwind CSS
+- React 19
+- Vite 7
+- React Router 7
+- Tailwind CSS 4
 - Framer Motion
-- React Router DOM
+- Neon serverless Postgres
 
-## Getting Started
+## Local development
 
-### Prerequisites
+Use Node.js 20.19 or newer.
 
-- Node.js (v14 or higher)
-- npm or yarn
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Jabirmahmud0/portfolio_xabir.git
-   ```
-
-2. Navigate to the project directory:
-   ```bash
-   cd portfolio_xabir
-   ```
-
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-### Development
-
-Start the development server:
 ```bash
+npm install
 npm run dev
 ```
 
-### Build
+`npm run dev` starts Vite with a local middleware adapter for the same handlers deployed as Vercel functions. Login, content editing, password changes, and uploads therefore work locally without requiring a Vercel CLI login.
 
-Create a production build:
+## Validation
+
 ```bash
+npm run lint
 npm run build
 ```
 
-### Preview
+## Routes
 
-Preview the production build:
-```bash
-npm run preview
-```
+- `/` - portfolio homepage
+- `/projects` - complete project archive
+- `/projects/:slug` - selected engineering case study
+- `/jabir` - private content administration
 
-## Security
+Vercel rewrites only the client-side routes to `index.html`; `/api/*` remains available to serverless functions.
 
-Run security audit:
-```bash
-npm run audit
-```
+## Portfolio CMS setup
 
-## Deployment
+The CMS intentionally keeps every secret server-side. Never prefix these values with `VITE_`.
 
-This project can be deployed to any static hosting service like Vercel, Netlify, or GitHub Pages.
+1. Rotate any database credential that has been shared in chat or committed anywhere.
+2. In Neon, create a restricted runtime role for this portfolio and use its pooled connection string as `DATABASE_URL`. Keep the owner/migration connection separate as `MIGRATION_DATABASE_URL` only while applying schema changes; do not add it to Vercel.
+3. Copy `.env.example` to `.env` and fill in `DATABASE_URL`, `ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH`, and a random `SESSION_SECRET` of at least 32 characters.
+4. Generate the password hash without storing the plain password in source:
 
-## Contributing
+   ```powershell
+   $env:ADMIN_PASSWORD_PLAIN = Read-Host -AsSecureString | ConvertFrom-SecureString -AsPlainText
+   npm run auth:hash-password
+   Remove-Item Env:ADMIN_PASSWORD_PLAIN
+   ```
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a pull request
+5. Create and seed the database. The migration command may use the temporary migration credential; seeding uses the restricted runtime credential:
 
-## License
+   ```bash
+   npm run db:migrate
+   npm run db:seed
+   ```
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+6. Add the same environment variables to the Vercel project and redeploy.
+
+Project deletion is a recoverable soft archive. Public pages read published database content and automatically retain the bundled static content if the database is temporarily unavailable.
+
+The environment password hash bootstraps the single admin credential during the first seed. Later password changes are made from the Security tab in `/jabir` and stored as a salted scrypt hash in Neon. A change invalidates all existing admin sessions.
+
+Project images and portraits use a server-signed Cloudinary upload. Add `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET` only to server environment variables; the API secret is never sent to the browser.
 
 ## Contact
 
-- Email: hello@jabirmahmud.com
+- Email: [jaabirmahmud01@gmail.com](mailto:jaabirmahmud01@gmail.com)
 - GitHub: [Jabirmahmud0](https://github.com/Jabirmahmud0)
-- Twitter: [@jabirmahmud](https://twitter.com/jabirmahmud0)
-- LinkedIn: [jabirmahmud](https://linkedin.com/in/jabirmahmud0)
+- LinkedIn: [jabirmahmud0](https://www.linkedin.com/in/jabirmahmud0)
+- X: [Jabirmahmud0](https://x.com/Jabirmahmud0)
