@@ -1,4 +1,4 @@
-export const fallbackSections = {
+﻿export const fallbackSections = {
   site: {
     title: "Jabir Mahmud - Junior Software Engineer",
     description: "Portfolio of Jabir Mahmud, a junior software engineer building full-stack, frontend, and AI-powered applications with React, Next.js, Node.js, PostgreSQL, and MongoDB.",
@@ -82,7 +82,7 @@ export const fallbackSections = {
       {
         id: "full-stack",
         role: "Full-Stack Software Engineer",
-        label: "Full-Stack Engineer R?sum?",
+        label: "Full-Stack Engineer Resume",
         description: "Product engineering across frontend, APIs, databases, and deployment.",
         url: "/Jabir_Mahmud_Full_Stack_AI_Engineer_Resume.pdf",
         publicId: "",
@@ -94,7 +94,7 @@ export const fallbackSections = {
       {
         id: "frontend",
         role: "Frontend Engineer",
-        label: "Frontend Engineer R?sum?",
+        label: "Frontend Engineer Resume",
         description: "React, accessible interfaces, responsive systems, and frontend architecture.",
         url: "",
         publicId: "",
@@ -106,7 +106,7 @@ export const fallbackSections = {
       {
         id: "ai",
         role: "AI Engineer",
-        label: "AI Engineer R?sum?",
+        label: "AI Engineer Resume",
         description: "LLM applications, research pipelines, structured outputs, and AI reliability.",
         url: "",
         publicId: "",

@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 
 const navigation = [
   { id: "overview", label: "Overview", short: "Home", path: "M4 13h6V4H4v9Zm10 7h6v-9h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z" },
   { id: "projects", label: "Projects", short: "Work", path: "m8 3 1.6 3.2L13 8l-3.4 1.8L8 13l-1.6-3.2L3 8l3.4-1.8L8 3Zm8 8 1.3 2.7L20 15l-2.7 1.3L16 19l-1.3-2.7L12 15l2.7-1.3L16 11ZM5 14l.9 1.9L8 17l-2.1 1.1L5 20l-.9-1.9L2 17l2.1-1.1L5 14Z" },
-  { id: "resumes", label: "R?sum?s", short: "CVs", path: "M6 2h9l5 5v15H6V2Zm8 2v5h4M9 13h8M9 17h8M9 9h2" },
+  { id: "resumes", label: "Resumes", short: "CVs", path: "M6 2h9l5 5v15H6V2Zm8 2v5h4M9 13h8M9 17h8M9 9h2" },
   { id: "content", label: "Site content", short: "Content", path: "M5 4h14v3H5V4Zm0 6h14v3H5v-3Zm0 6h9v3H5v-3Z" },
   { id: "security", label: "Security", short: "Secure", path: "M12 2 4 5v6c0 5.1 3.4 9.8 8 11 4.6-1.2 8-5.9 8-11V5l-8-3Zm0 5a3 3 0 0 1 1 5.8V16h-2v-3.2A3 3 0 0 1 12 7Z" },
 ];

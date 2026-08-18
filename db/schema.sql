@@ -1,4 +1,4 @@
-create extension if not exists pgcrypto;
+﻿create extension if not exists pgcrypto;
 -- statement-breakpoint
 create table if not exists portfolio_sections (
   key text primary key,
@@ -70,8 +70,18 @@ create table if not exists portfolio_admin_credentials (
 insert into portfolio_sections (key, data, published, sort_order)
 values (
   'resumes',
-  '{"items":[{"id":"full-stack","role":"Full-Stack Software Engineer","label":"Full-Stack Engineer R?sum?","description":"Product engineering across frontend, APIs, databases, and deployment.","url":"/Jabir_Mahmud_Full_Stack_AI_Engineer_Resume.pdf","publicId":"","visible":true,"primary":true,"sortOrder":0,"updatedAt":"2026-08-18"},{"id":"frontend","role":"Frontend Engineer","label":"Frontend Engineer R?sum?","description":"React, accessible interfaces, responsive systems, and frontend architecture.","url":"","publicId":"","visible":false,"primary":false,"sortOrder":1,"updatedAt":""},{"id":"ai","role":"AI Engineer","label":"AI Engineer R?sum?","description":"LLM applications, research pipelines, structured outputs, and AI reliability.","url":"","publicId":"","visible":false,"primary":false,"sortOrder":2,"updatedAt":""}]}'::jsonb,
+  '{"items":[{"id":"full-stack","role":"Full-Stack Software Engineer","label":"Full-Stack Engineer Resume","description":"Product engineering across frontend, APIs, databases, and deployment.","url":"/Jabir_Mahmud_Full_Stack_AI_Engineer_Resume.pdf","publicId":"","visible":true,"primary":true,"sortOrder":0,"updatedAt":"2026-08-18"},{"id":"frontend","role":"Frontend Engineer","label":"Frontend Engineer Resume","description":"React, accessible interfaces, responsive systems, and frontend architecture.","url":"","publicId":"","visible":false,"primary":false,"sortOrder":1,"updatedAt":""},{"id":"ai","role":"AI Engineer","label":"AI Engineer Resume","description":"LLM applications, research pipelines, structured outputs, and AI reliability.","url":"","publicId":"","visible":false,"primary":false,"sortOrder":2,"updatedAt":""}]}'::jsonb,
   true,
   6
 )
 on conflict (key) do nothing;
+-- statement-breakpoint
+update portfolio_sections
+set data = replace(
+  replace(data::text, 'R?sum?s', 'Resumes'),
+  'R?sum?',
+  'Resume'
+)::jsonb,
+updated_at = now()
+where key = 'resumes'
+  and data::text like '%R?sum?%';

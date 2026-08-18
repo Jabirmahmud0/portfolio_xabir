@@ -1,4 +1,4 @@
-import { usePortfolioData } from "../PortfolioDataContext.js";
+﻿import { usePortfolioData } from "../PortfolioDataContext.js";
 import ResumeMenu from "./ResumeMenu.jsx";
 
 export default function PortfolioSidebar({ activeSection, navItems, themeObj }) {
@@ -29,7 +29,7 @@ export default function PortfolioSidebar({ activeSection, navItems, themeObj }) 
         </div>
 
         <div className="mt-7 flex flex-wrap gap-3">
-          <ResumeMenu themeObj={themeObj} label="View r?sum?" />
+          <ResumeMenu themeObj={themeObj} label="View resume" />
           <a href={`mailto:${profile.email}`} className={`inline-flex items-center rounded-lg border px-4 py-2.5 text-sm font-semibold ${themeObj.border} ${themeObj.buttonBg} ${themeObj.buttonText}`}>
             Email me
           </a>

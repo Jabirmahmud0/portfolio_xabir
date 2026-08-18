@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+﻿import { useEffect, useMemo, useRef, useState } from "react";
 import { usePortfolioData } from "../PortfolioDataContext.js";
 import { ExternalIcon } from "./PortfolioUI.jsx";
 
-export default function ResumeMenu({ themeObj, label = "View r?sum?", variant = "primary" }) {
+export default function ResumeMenu({ themeObj, label = "View resume", variant = "primary" }) {
   const { sections } = usePortfolioData();
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
@@ -11,7 +11,7 @@ export default function ResumeMenu({ themeObj, label = "View r?sum?", variant = 
       .filter((resume) => resume.visible && resume.url)
       .sort((a, b) => Number(a.sortOrder) - Number(b.sortOrder));
     if (configured.length) return configured;
-    return sections.profile?.resumeUrl ? [{ id: "default", role: "Software Engineer", label: "Software Engineer R?sum?", description: "", url: sections.profile.resumeUrl, primary: true }] : [];
+    return sections.profile?.resumeUrl ? [{ id: "default", role: "Software Engineer", label: "Software Engineer Resume", description: "", url: sections.profile.resumeUrl, primary: true }] : [];
   }, [sections.profile?.resumeUrl, sections.resumes?.items]);
 
   useEffect(() => {
@@ -44,10 +44,10 @@ export default function ResumeMenu({ themeObj, label = "View r?sum?", variant = 
       </button>
       {open && (
         <>
-          <button type="button" aria-label="Close r?sum? menu" onClick={() => setOpen(false)} className="fixed inset-0 z-40 bg-black/20 backdrop-blur-[2px] sm:bg-transparent sm:backdrop-blur-none" />
-          <div role="menu" aria-label="R?sum?s by role" className={`fixed inset-x-4 bottom-4 z-50 overflow-hidden rounded-2xl border p-2 shadow-2xl sm:absolute sm:inset-x-auto sm:bottom-auto sm:left-0 sm:top-[calc(100%+0.75rem)] sm:w-[390px] ${themeObj.card} ${themeObj.border}`}>
+          <button type="button" aria-label="Close resume menu" onClick={() => setOpen(false)} className="fixed inset-0 z-40 bg-black/20 backdrop-blur-[2px] sm:bg-transparent sm:backdrop-blur-none" />
+          <div role="menu" aria-label="Resumes by role" className={`fixed inset-x-4 bottom-4 z-50 overflow-hidden rounded-2xl border p-2 shadow-2xl sm:absolute sm:inset-x-auto sm:bottom-auto sm:left-0 sm:top-[calc(100%+0.75rem)] sm:w-[390px] ${themeObj.card} ${themeObj.border}`}>
             <div className="px-4 pb-3 pt-2">
-              <p className={`text-xs font-bold uppercase tracking-[0.17em] ${themeObj.accent}`}>R?sum? by role</p>
+              <p className={`text-xs font-bold uppercase tracking-[0.17em] ${themeObj.accent}`}>Resume by role</p>
               <p className={`mt-1 text-sm ${themeObj.muted}`}>Open the version that matches the opportunity.</p>
             </div>
             <div className="space-y-1">

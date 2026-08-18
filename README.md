@@ -1,4 +1,4 @@
-# Jabir Mahmud - Portfolio
+﻿# Jabir Mahmud - Portfolio
 
 Portfolio website for Jabir Mahmud, a junior software engineer focused on full-stack, frontend, and AI engineering roles.
 
@@ -18,7 +18,7 @@ Live site: [jabir.pro.bd](https://jabir.pro.bd/)
 - Database-aware XML sitemap with a static fallback
 - Password-protected portfolio administration at `/jabir`
 - In-dashboard password changes with current-password verification and session revocation
-- Role-specific r?sum? selector with protected Cloudinary PDF management
+- Role-specific resume selector with protected Cloudinary PDF management
 - Neon Postgres-backed projects and site content with static fallback
 
 ## Stack

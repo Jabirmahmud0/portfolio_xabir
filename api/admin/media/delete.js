@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+﻿import { createHash } from "node:crypto";
 import { requireAdmin } from "../../_lib/auth.js";
 import { allowMethods, assertSameOrigin, handleApiError, readJson, sendJson } from "../../_lib/http.js";
 
@@ -9,7 +9,7 @@ export default async function handler(request, response) {
     assertSameOrigin(request);
     const { publicId = "" } = await readJson(request);
     if (typeof publicId !== "string" || !publicId.startsWith("jabir-portfolio/resumes/")) {
-      sendJson(response, 400, { error: "Only managed r?sum? files can be deleted." });
+      sendJson(response, 400, { error: "Only managed resume files can be deleted." });
       return;
     }
     const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
@@ -34,7 +34,7 @@ export default async function handler(request, response) {
     const cloudinaryResponse = await fetch(`https://api.cloudinary.com/v1_1/${encodeURIComponent(cloudName)}/raw/destroy`, { method: "POST", body: form });
     const payload = await cloudinaryResponse.json().catch(() => ({}));
     if (!cloudinaryResponse.ok || !["ok", "not found"].includes(payload.result)) {
-      const error = new Error("Cloudinary could not delete the r?sum?.");
+      const error = new Error("Cloudinary could not delete the resume.");
       error.statusCode = 502;
       throw error;
     }

@@ -1,4 +1,4 @@
-import { motion as Motion } from "framer-motion";
+﻿import { motion as Motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowIcon, ExternalIcon, ProjectLinks, SectionHeading } from "./PortfolioUI.jsx";
 import { usePortfolioData } from "../PortfolioDataContext.js";
@@ -72,7 +72,7 @@ export function ContactSection({ reveal, themeObj }) {
           <a href={profile.socialLinks.find((link) => link.label === "LinkedIn")?.url} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-semibold ${themeObj.border} ${themeObj.buttonBg} ${themeObj.buttonText}`}>
             LinkedIn <ExternalIcon />
           </a>
-          <ResumeMenu themeObj={themeObj} label="View role-specific r?sum?s" variant="secondary" />
+          <ResumeMenu themeObj={themeObj} label="View role-specific resumes" variant="secondary" />
         </div>
         <p className={`mt-6 text-sm ${themeObj.muted}`}>{contact.locationLine}</p>
       </div>
