@@ -24,6 +24,8 @@ export function ProjectsSection({ reveal, themeObj }) {
               >
                 <img
                   src={project.image}
+                  srcSet={`${project.image.replace(/\.webp$/i, "-card.webp")} 1280w, ${project.image} 2560w`}
+                  sizes="(min-width: 768px) 38vw, calc(100vw - 3rem)"
                   alt={`${project.name} interface`}
                   width="640"
                   height="400"

@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from "react";
+﻿import { useContext, useMemo, useState } from "react";
 import { motion as Motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../ThemeProvider.jsx";
@@ -93,6 +93,8 @@ function EditorialProject({ project, index, themeObj, reduceMotion }) {
       >
         <img
           src={project.image}
+          srcSet={`${project.image.replace(/\.webp$/i, "-card.webp")} 1280w, ${project.image} 2560w`}
+          sizes="(min-width: 1024px) 58vw, calc(100vw - 2rem)"
           alt={`${project.name} interface`}
           width="960"
           height="600"
