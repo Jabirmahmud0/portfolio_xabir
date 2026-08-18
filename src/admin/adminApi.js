@@ -19,17 +19,20 @@ export const adminApi = {
   deleteProject: (id) => request(`/api/admin/projects/${id}`, { method: "DELETE" }),
   sections: () => request("/api/admin/sections"),
   updateSection: (section) => request("/api/admin/sections", { method: "PUT", body: JSON.stringify(section) }),
-  uploadImage: async (file) => {
-    const signed = await request("/api/admin/media/sign", { method: "POST" });
+  uploadMedia: async (file, resourceType = "image") => {
+    const signed = await request("/api/admin/media/sign", { method: "POST", body: JSON.stringify({ resourceType }) });
     const form = new FormData();
     form.append("file", file);
     form.append("api_key", signed.apiKey);
     form.append("timestamp", String(signed.timestamp));
     form.append("folder", signed.folder);
     form.append("signature", signed.signature);
-    const response = await fetch(`https://api.cloudinary.com/v1_1/${encodeURIComponent(signed.cloudName)}/image/upload`, { method: "POST", body: form });
+    const response = await fetch(`https://api.cloudinary.com/v1_1/${encodeURIComponent(signed.cloudName)}/${signed.resourceType}/upload`, { method: "POST", body: form });
     const payload = await response.json().catch(() => ({}));
     if (!response.ok || !payload.secure_url) throw new Error(payload.error?.message || "Image upload failed.");
-    return payload.secure_url;
+    return { url: payload.secure_url, publicId: payload.public_id, resourceType: payload.resource_type };
   },
+  uploadImage: async (file) => (await adminApi.uploadMedia(file, "image")).url,
+  uploadResume: (file) => adminApi.uploadMedia(file, "raw"),
+  deleteResume: (publicId) => request("/api/admin/media/delete", { method: "DELETE", body: JSON.stringify({ publicId }) }),
 };

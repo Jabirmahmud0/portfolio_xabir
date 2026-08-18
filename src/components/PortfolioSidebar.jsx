@@ -1,5 +1,5 @@
-import { ExternalIcon } from "./PortfolioUI.jsx";
 import { usePortfolioData } from "../PortfolioDataContext.js";
+import ResumeMenu from "./ResumeMenu.jsx";
 
 export default function PortfolioSidebar({ activeSection, navItems, themeObj }) {
   const { sections } = usePortfolioData();
@@ -29,14 +29,7 @@ export default function PortfolioSidebar({ activeSection, navItems, themeObj }) 
         </div>
 
         <div className="mt-7 flex flex-wrap gap-3">
-          <a
-            href={profile.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${themeObj.primaryButton}`}
-          >
-            View resume <ExternalIcon />
-          </a>
+          <ResumeMenu themeObj={themeObj} label="View r?sum?" />
           <a href={`mailto:${profile.email}`} className={`inline-flex items-center rounded-lg border px-4 py-2.5 text-sm font-semibold ${themeObj.border} ${themeObj.buttonBg} ${themeObj.buttonText}`}>
             Email me
           </a>

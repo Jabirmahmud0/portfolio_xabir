@@ -11,6 +11,7 @@ import projectHandler from './api/admin/projects/[id].js'
 import sectionsHandler from './api/admin/sections.js'
 import passwordHandler from './api/admin/password.js'
 import mediaSignHandler from './api/admin/media/sign.js'
+import mediaDeleteHandler from './api/admin/media/delete.js'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
@@ -29,6 +30,7 @@ export default defineConfig(({ mode }) => {
     ['/api/admin/sections', sectionsHandler],
     ['/api/admin/password', passwordHandler],
     ['/api/admin/media/sign', mediaSignHandler],
+    ['/api/admin/media/delete', mediaDeleteHandler],
   ])
 
   const localApi = {

@@ -11,7 +11,7 @@ function Field({ label, children, wide = false }) {
 
 function ProfileFields({ value, setValue }) {
   return <div className="grid gap-5 md:grid-cols-2">
-    {["eyebrow", "name", "availability", "resumeUrl", "email"].map((field) => <Field key={field} label={field}><input className={inputClass} value={value[field] || ""} onChange={(e) => setValue({ ...value, [field]: e.target.value })} /></Field>)}
+    {["eyebrow", "name", "availability", "email"].map((field) => <Field key={field} label={field}><input className={inputClass} value={value[field] || ""} onChange={(e) => setValue({ ...value, [field]: e.target.value })} /></Field>)}
     <Field label="Introduction" wide><textarea rows="4" className={inputClass} value={value.intro || ""} onChange={(e) => setValue({ ...value, intro: e.target.value })} /></Field>
     <Field label="Focus areas (one per line)" wide><textarea rows="4" className={inputClass} value={(value.focusAreas || []).join("\n")} onChange={(e) => setValue({ ...value, focusAreas: e.target.value.split("\n").map((item) => item.trim()).filter(Boolean) })} /></Field>
     <Field label="Social links (Label | URL)" wide><textarea rows="5" className={inputClass} value={(value.socialLinks || []).map((item) => `${item.label} | ${item.url}`).join("\n")} onChange={(e) => setValue({ ...value, socialLinks: e.target.value.split("\n").map((line) => { const [label, ...url] = line.split("|"); return { label: label?.trim(), url: url.join("|").trim() }; }).filter((item) => item.label && item.url) })} /></Field>

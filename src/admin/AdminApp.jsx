@@ -6,6 +6,7 @@ import AdminOverview from "./AdminOverview.jsx";
 import ProjectManager from "./ProjectManager.jsx";
 import ContentManager from "./ContentManager.jsx";
 import SecuritySettings from "./SecuritySettings.jsx";
+import ResumeManager from "./ResumeManager.jsx";
 
 function Login({ onSuccess, notice }) {
   const [password, setPassword] = useState("");
@@ -112,6 +113,7 @@ export default function AdminApp() {
       {error && <div className="mb-7 rounded-2xl border border-[#d0a96b]/40 bg-[#d0a96b]/10 p-4 text-sm text-[#745725]"><strong>Studio connection:</strong> {error}</div>}
       {tab === "overview" && <AdminOverview stats={stats} projects={projects} onNavigate={setTab} />}
       {tab === "projects" && <ProjectManager projects={projects} onChange={setProjects} />}
+      {tab === "resumes" && <ResumeManager sections={sections} onChange={setSections} />}
       {tab === "content" && <ContentManager sections={sections} onChange={setSections} />}
       {tab === "security" && <SecuritySettings onPasswordChanged={() => { setNotice("Password changed successfully. Sign in with your new password."); setAuthenticated(false); setTab("overview"); }} />}
     </AdminShell>
