@@ -154,7 +154,7 @@ export default function AllProjects() {
     <main className={`min-h-screen ${themeObj.bg} ${themeObj.text} transition-colors duration-300`}>
       <SEOHead title="Projects - Jabir Mahmud" description="Full-stack applications, AI products, developer tools, and frontend engineering projects by Jabir Mahmud." canonicalUrl="https://jabir.pro.bd/projects" />
 
-      <div className="mx-auto max-w-7xl px-6 py-8 md:px-10 md:py-12 lg:px-14">
+      <div className="mx-auto max-w-7xl px-6 py-6 md:px-10 md:py-8 lg:px-14">
         <header className="flex items-center justify-between gap-4">
           <Link to="/" className={`group inline-flex items-center gap-2 text-sm font-semibold ${themeObj.link}`}>
             <span aria-hidden="true" className="transition-transform group-hover:-translate-x-1">&larr;</span> Portfolio
@@ -162,44 +162,46 @@ export default function AllProjects() {
           <ThemeToggle />
         </header>
 
-        <section className="max-w-4xl pb-12 pt-16 md:pb-16 md:pt-24">
-          <p className={`text-sm font-semibold uppercase tracking-[0.18em] ${themeObj.accent}`}>Projects by focus</p>
-          <h1 className={`mt-4 text-4xl font-bold tracking-tight md:text-6xl ${themeObj.text}`}>Things I've built</h1>
-          <p className={`mt-5 max-w-2xl text-lg leading-relaxed ${themeObj.muted}`}>
-            Full-stack products, AI engineering systems, and frontend work. Each project links to a live build or its GitHub repository.
-          </p>
+        <section className={`grid gap-8 border-b pb-8 pt-10 md:pt-14 lg:grid-cols-[minmax(0,1fr)_minmax(340px,460px)] lg:items-end ${themeObj.border}`}>
+          <div>
+            <p className={`text-xs font-bold uppercase tracking-[0.2em] ${themeObj.accent}`}>Projects by focus</p>
+            <h1 className={`mt-3 text-4xl font-bold tracking-[-0.04em] md:text-5xl lg:text-[3.5rem] ${themeObj.text}`}>Things I've built</h1>
+            <p className={`mt-3 max-w-xl text-base leading-7 ${themeObj.muted}`}>
+              Full-stack products, AI systems, and frontend work - each connected to a live build or GitHub repository.
+            </p>
+          </div>
+
+          <div>
+            <label htmlFor="project-search" className="sr-only">Search projects by name, category, or technology</label>
+            <div className={`flex items-center rounded-xl border px-4 py-3 shadow-sm transition-colors focus-within:border-[#00786B] ${themeObj.card} ${themeObj.border}`}>
+              <svg aria-hidden="true" className={`mr-3 h-5 w-5 shrink-0 ${themeObj.muted}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+              <input id="project-search" type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search React, AI, PostgreSQL..." className={`w-full bg-transparent outline-none ${themeObj.text}`} />
+            </div>
+            <p aria-live="polite" className={`mt-2 text-right text-xs ${themeObj.muted}`}>Showing {filteredProjects.length} {filteredProjects.length === 1 ? "project" : "projects"}</p>
+          </div>
         </section>
 
-        <nav className={`mb-10 flex flex-wrap gap-3 border-y py-4 ${themeObj.border}`} aria-label="Project sections">
+        <nav className="mb-12 flex flex-wrap items-center gap-2 pt-5 md:mb-14" aria-label="Project sections">
+          <span className={`mr-1 font-mono text-[10px] uppercase tracking-[0.18em] ${themeObj.muted}`}>Jump to</span>
           {projectSections.map((section, index) => (
-            <a key={section.id} href={`#${section.id}`} className={`rounded-full border px-4 py-2 text-sm font-semibold ${themeObj.border} ${themeObj.buttonBg} ${themeObj.buttonText}`}>
+            <a key={section.id} href={`#${section.id}`} className={`rounded-full border px-3 py-1.5 text-sm font-semibold ${themeObj.border} ${themeObj.buttonBg} ${themeObj.buttonText}`}>
               {String(index + 1).padStart(2, "0")}. {section.shortTitle}
             </a>
           ))}
         </nav>
-
-        <div className="mb-20 max-w-xl">
-          <label htmlFor="project-search" className="sr-only">Search projects by name, category, or technology</label>
-          <div className={`flex items-center rounded-xl border px-4 py-3 transition-colors focus-within:border-[#00786B] ${themeObj.card} ${themeObj.border}`}>
-            <svg aria-hidden="true" className={`mr-3 h-5 w-5 ${themeObj.muted}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-            <input id="project-search" type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search React, AI, PostgreSQL..." className={`w-full bg-transparent outline-none ${themeObj.text}`} />
-          </div>
-          <p aria-live="polite" className={`mt-3 text-sm ${themeObj.muted}`}>{filteredProjects.length} {filteredProjects.length === 1 ? "project" : "projects"}</p>
-        </div>
-
-        <div className="space-y-28 md:space-y-36">
+        <div className="space-y-24 md:space-y-32">
           {visibleSections.map((section, sectionIndex) => (
             <section key={section.id} id={section.id} className="scroll-mt-8" aria-labelledby={`${section.id}-heading`}>
-              <div className={`mb-14 flex flex-col justify-between gap-5 border-b pb-6 md:flex-row md:items-end ${themeObj.border}`}>
+              <div className={`mb-9 flex flex-col justify-between gap-4 border-b pb-5 md:flex-row md:items-end ${themeObj.border}`}>
                 <div>
                   <p className={`text-xs font-bold uppercase tracking-[0.18em] ${themeObj.accent}`}>{String(sectionIndex + 1).padStart(2, "0")}</p>
-                  <h2 id={`${section.id}-heading`} className={`mt-2 text-3xl font-bold tracking-tight md:text-4xl ${themeObj.text}`}>{section.title}</h2>
+                  <h2 id={`${section.id}-heading`} className={`mt-2 text-3xl font-bold tracking-tight ${themeObj.text}`}>{section.title}</h2>
                   <p className={`mt-3 max-w-2xl leading-relaxed ${themeObj.muted}`}>{section.description}</p>
                 </div>
                 <p className={`shrink-0 font-mono text-sm ${themeObj.muted}`}>{section.projects.length} {section.projects.length === 1 ? "project" : "projects"}</p>
               </div>
 
-              <div className="space-y-20 lg:space-y-28">
+              <div className="space-y-16 lg:space-y-24">
                 {section.projects.map((project, index) => (
                   <EditorialProject key={project.slug} project={project} index={index} themeObj={themeObj} reduceMotion={reduceMotion} />
                 ))}
