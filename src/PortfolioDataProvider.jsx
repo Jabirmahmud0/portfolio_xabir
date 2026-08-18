@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { projects as fallbackProjects } from "./data/projects.js";
 import { fallbackSections } from "./data/siteContent.js";
 import { PortfolioDataContext } from "./PortfolioDataContext.js";
@@ -12,7 +12,7 @@ export default function PortfolioDataProvider({ children }) {
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch("/api/content", { signal: controller.signal })
+    fetch("/api/content", { signal: controller.signal, cache: "no-store" })
       .then((response) => {
         if (!response.ok) throw new Error("Database content is unavailable.");
         return response.json();

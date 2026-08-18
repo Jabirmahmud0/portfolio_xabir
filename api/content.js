@@ -1,4 +1,4 @@
-import { query } from "./_lib/db.js";
+﻿import { query } from "./_lib/db.js";
 import { allowMethods, handleApiError } from "./_lib/http.js";
 import { projectRowToJson } from "./_lib/projects.js";
 
@@ -10,7 +10,9 @@ export default async function handler(request, response) {
       query("select * from portfolio_projects where published = true and deleted_at is null order by sort_order, created_at"),
     ]);
     const sections = Object.fromEntries(sectionRows.map((row) => [row.key, row.data]));
-    response.setHeader("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+    response.setHeader("Cache-Control", "no-store, max-age=0");
+    response.setHeader("CDN-Cache-Control", "no-store");
+    response.setHeader("Vercel-CDN-Cache-Control", "no-store");
     response.statusCode = 200;
     response.setHeader("Content-Type", "application/json; charset=utf-8");
     response.end(JSON.stringify({ sections, projects: projectRows.map(projectRowToJson) }));
