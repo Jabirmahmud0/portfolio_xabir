@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { adminApi } from "./adminApi.js";
 import ImageField from "./ImageField.jsx";
 
 const emptyProject = {
   slug: "", section: "full-stack", name: "", desc: "", tags: [], github: "", backend: "", live: "",
-  deployments: [], image: "", status: "Deployed", category: "", featured: false, homepage: false,
+  deployments: [], image: "", status: "In development", category: "", featured: false, homepage: false,
   published: true, sortOrder: 0,
   caseStudy: { challenge: "", approach: "", highlights: [], proof: "" },
 };
@@ -25,6 +25,7 @@ function Field({ label, children, className = "" }) {
 
 export default function ProjectManager({ projects, onChange }) {
   const [selectedId, setSelectedId] = useState(projects[0]?.id || "new");
+  const [creating, setCreating] = useState(false);
   const selected = useMemo(() => projects.find((project) => project.id === selectedId), [projects, selectedId]);
   const [draft, setDraft] = useState(() => selected ? editableProject(selected) : structuredClone(emptyProject));
   const [busy, setBusy] = useState(false);
@@ -33,12 +34,13 @@ export default function ProjectManager({ projects, onChange }) {
   const homepageCount = projects.filter((project) => project.homepage).length;
 
   useEffect(() => {
-    if (!projects.length || selectedId !== "new") return;
+    if (creating || !projects.length || selected) return;
     setSelectedId(projects[0].id);
     setDraft(editableProject(projects[0]));
-  }, [projects, selectedId]);
+  }, [creating, projects, selected]);
 
   function choose(project) {
+    setCreating(!project);
     setSelectedId(project?.id || "new");
     setDraft(project ? editableProject(project) : { ...structuredClone(emptyProject), sortOrder: projects.length });
     setMessage("");
@@ -107,7 +109,7 @@ export default function ProjectManager({ projects, onChange }) {
   return (
     <div className="grid gap-6 xl:grid-cols-[280px_minmax(0,1fr)]">
       <aside className="sticky top-8 grid max-h-[calc(100vh-4rem)] self-start grid-rows-[auto_auto_minmax(0,1fr)] overflow-hidden rounded-2xl border border-neutral-200 bg-white p-3 shadow-sm">
-        <button onClick={() => choose(null)} className="w-full rounded-xl bg-[#00786B] px-4 py-3 text-sm font-bold text-white hover:bg-[#00675d]">+ New project</button>
+        <button type="button" onClick={() => choose(null)} className="w-full rounded-xl bg-[#00786B] px-4 py-3 text-sm font-bold text-white hover:bg-[#00675d]">+ New project</button>
         <div className="mx-1 my-3 rounded-xl bg-[#082e2a] px-3 py-3 text-white">
           <div className="flex items-center justify-between gap-2"><span className="font-mono text-[9px] uppercase tracking-[0.17em] text-[#72cfc1]">Homepage showcase</span><strong className="text-lg">{homepageCount}</strong></div>
           <p className="mt-1 text-[11px] leading-4 text-white/50">Tap the circle beside any project to show or hide it.</p>
@@ -127,7 +129,7 @@ export default function ProjectManager({ projects, onChange }) {
                 title={project.homepage ? "Shown on homepage" : "Not on homepage"}
                 className={`mr-3 grid h-8 w-8 place-items-center rounded-full border transition-all duration-300 disabled:opacity-40 ${project.homepage ? "border-[#00786B] bg-[#00786B] text-white shadow-[0_0_0_4px_rgba(0,120,107,0.09)]" : "border-neutral-300 bg-white text-neutral-300 hover:border-[#00786B] hover:text-[#00786B]"}`}
               >
-                {quickSavingId === project.id ? <span className="h-3 w-3 animate-spin rounded-full border-2 border-current border-t-transparent motion-reduce:animate-none" /> : <span className="text-base leading-none">{project.homepage ? "?" : "+"}</span>}
+                {quickSavingId === project.id ? <span className="h-3 w-3 animate-spin rounded-full border-2 border-current border-t-transparent motion-reduce:animate-none" /> : <span className="text-base leading-none">{project.homepage ? "\u2713" : "+"}</span>}
               </button>
             </div>
           ))}
@@ -146,7 +148,7 @@ export default function ProjectManager({ projects, onChange }) {
           <Field label="Slug"><input className={inputClass} value={draft.slug} onChange={(e) => update("slug", e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, "-"))} required /></Field>
           <Field label="Section"><select className={inputClass} value={draft.section} onChange={(e) => update("section", e.target.value)}><option value="full-stack">Full-Stack</option><option value="ai-tools">AI Engineering</option><option value="frontend-ui">Frontend & UI</option></select></Field>
           <Field label="Category"><input className={inputClass} value={draft.category} onChange={(e) => update("category", e.target.value)} /></Field>
-          <Field label={draft.live ? "Status ? Automatic" : "Status"}><input className={`${inputClass} ${draft.live ? "cursor-not-allowed bg-neutral-100 text-neutral-500" : ""}`} value={draft.live ? "Deployed" : draft.status} readOnly={Boolean(draft.live)} onChange={(e) => update("status", e.target.value)} />{draft.live && <span className="mt-1 block text-xs text-[#00786B]">A Main live URL automatically marks this project as Deployed.</span>}</Field>
+          <Field label={draft.live ? "Status (automatic)" : "Status"}><input className={`${inputClass} ${draft.live ? "cursor-not-allowed bg-neutral-100 text-neutral-500" : ""}`} value={draft.live ? "Deployed" : draft.status} readOnly={Boolean(draft.live)} onChange={(e) => update("status", e.target.value)} />{draft.live && <span className="mt-1 block text-xs text-[#00786B]">A Main live URL automatically marks this project as Deployed.</span>}</Field>
           <Field label="Display order"><input type="number" className={inputClass} value={draft.sortOrder} onChange={(e) => update("sortOrder", Number(e.target.value))} /><span className="mt-1 block text-xs text-neutral-400">Lower numbers appear first on the homepage and project archive.</span></Field>
           <Field label="Description" className="md:col-span-2"><textarea rows="4" className={inputClass} value={draft.desc} onChange={(e) => update("desc", e.target.value)} required /></Field>
           <Field label="Technology tags (comma separated)" className="md:col-span-2"><input className={inputClass} value={draft.tags.join(", ")} onChange={(e) => update("tags", e.target.value.split(",").map((tag) => tag.trim()).filter(Boolean))} /></Field>

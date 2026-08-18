@@ -1,4 +1,4 @@
-const textFields = ["slug", "section", "name", "desc", "github", "backend", "live", "image", "status", "category"];
+﻿const textFields = ["slug", "section", "name", "desc", "github", "backend", "live", "image", "status", "category"];
 
 function validateUrl(value, label, allowLocal = false) {
   if (!value) return;
@@ -54,10 +54,16 @@ export function normalizeProject(input) {
   validateUrl(project.live, "Live URL");
   validateUrl(project.image, "Image URL", true);
   for (const deployment of project.deployments) validateUrl(deployment.url, `${deployment.label} deployment URL`);
-  if (project.live) project.status = "Deployed";
+  project.status = project.live ? "Deployed" : (project.status || "In development");
   return project;
 }
 
+export function projectApiError(error) {
+  if (error?.code !== "23505") return error;
+  const conflict = new Error("A project with this slug already exists.");
+  conflict.statusCode = 409;
+  return conflict;
+}
 function normalizeCaseStudy(value) {
   if (!value || typeof value !== "object") return null;
   const normalized = {

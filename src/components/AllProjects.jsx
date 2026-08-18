@@ -93,7 +93,7 @@ function EditorialProject({ project, index, themeObj, reduceMotion }) {
       >
         <img
           src={project.image}
-          srcSet={`${project.image.replace(/\.webp$/i, "-card.webp")} 1280w, ${project.image} 2560w`}
+          srcSet={/^\/[^/]+\.webp$/i.test(project.image) ? `${project.image.replace(/\.webp$/i, "-card.webp")} 1280w, ${project.image} 2560w` : undefined}
           sizes="(min-width: 1024px) 58vw, calc(100vw - 2rem)"
           alt={`${project.name} interface`}
           width="960"

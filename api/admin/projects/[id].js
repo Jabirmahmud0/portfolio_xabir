@@ -1,7 +1,7 @@
-import { requireAdmin } from "../../_lib/auth.js";
+﻿import { requireAdmin } from "../../_lib/auth.js";
 import { query } from "../../_lib/db.js";
 import { allowMethods, assertSameOrigin, handleApiError, readJson, sendJson } from "../../_lib/http.js";
-import { normalizeProject, projectRowToJson } from "../../_lib/projects.js";
+import { normalizeProject, projectApiError, projectRowToJson } from "../../_lib/projects.js";
 
 export default async function handler(request, response) {
   if (!allowMethods(request, response, ["PUT", "DELETE"])) return;
@@ -39,6 +39,6 @@ export default async function handler(request, response) {
     }
     sendJson(response, 200, { project: projectRowToJson(rows[0]) });
   } catch (error) {
-    handleApiError(response, error);
+    handleApiError(response, projectApiError(error));
   }
 }
